@@ -125,6 +125,16 @@ table {
   border-spacing: 0;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+
 *,
 *:after,
 *:before {
