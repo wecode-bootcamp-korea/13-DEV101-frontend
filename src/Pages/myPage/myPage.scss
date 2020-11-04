@@ -1,0 +1,257 @@
+@import "../../Styles/common.scss";
+
+.MyPage {
+  .leftContainer {
+    width: 360px;
+    margin-right: 40px;
+
+    .profileCard {
+      width: 100%;
+      height: 329.8px;
+      box-shadow: rgba(41, 42, 43, 0.08) 0px 2px 6px, rgba(41, 42, 43, 0.04) 0px 1px 0px;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+
+      .profileTop {
+        height: 166px;
+        margin-top: 40px;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .profileImg {
+          width: 64px;
+          height: 64px;
+          border-radius: 100%;
+          margin-bottom: 8px;
+          background-color: gainsboro;
+        }
+
+        .profileName {
+          font-size: 16px;
+          color: $titleBlackColor;
+          text-align: center;
+          line-height: 24px;
+          letter-spacing: -0.3px;
+          font-weight: bold;
+        }
+
+        .email {
+          color: $textGrayColor;
+          font-size: 11px;
+          line-height: 16px;
+          letter-spacing: normal;
+          margin: 2px 0px 0px;
+        }
+      }
+
+      .profileBottom {
+        height: 71.8px;
+        margin: 24px 0 28px;
+        padding: 0 40px;
+        display: flex;
+
+        .bottomItem {
+          width: 93px;
+          height: 71px;
+          padding: 12px 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size: 11px;
+          color: $titleBlackColor;
+          cursor: pointer;
+
+          p {
+            margin-top: 7px;
+            line-height: 16px;
+          }
+
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .myPoint {
+        width: 63.2px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: $titleBlackColor;
+        text-align: center;
+        border-radius: 20px;
+        background-color: rgb(255, 249, 242);
+        margin-top: 16px;
+        padding: 8px 12px;
+
+        span {
+          margin-left: 2px;
+        }
+
+        img {
+          width: 16px;
+          height: 16px;
+          margin-left: 4px;
+        }
+      }
+    }
+
+    .attendanceCard {
+      height: 149px;
+      margin: 24px 0;
+      padding: 20px;
+      box-shadow: rgba(41, 42, 43, 0.1) 0px 2px 5px, rgba(41, 42, 43, 0.06) 0px 0px 0.5px;
+
+      .attendanceTitle {
+        display: flex;
+        justify-content: flex-start;
+
+        h2 {
+          font-size: 14px;
+          color: $titleBlackColor;
+          letter-spacing: -0.15px;
+          font-weight: 500;
+          line-height: 20px;
+        }
+
+        .attendanceIcon {
+          margin: 2.2px 0 0 2px;
+        }
+      }
+
+      .attendanceDesc {
+        font-size: 11px;
+        color: $textGrayColor;
+        line-height: 16px;
+        margin-top: 5px;
+
+        span {
+          color: rgb(253, 126, 20);
+        }
+      }
+
+      .attendancePoint {
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+
+        .pointCircle {
+          width: 28px;
+          height: 28px;
+          border-radius: 100%;
+          margin-bottom: 8px;
+          background-color: rgb(248, 248, 249);
+        }
+
+        p {
+          font-size: 9px;
+          line-height: 12px;
+          text-align: center;
+          margin-top: 4px;
+          color: rgb(168, 174, 179);
+        }
+      }
+    }
+
+    .cardTitle {
+      font-size: 14px;
+      font-weight: bold;
+      color: $titleBlackColor;
+      line-height: 20px;
+      letter-spacing: -0.15px;
+    }
+
+    .cardMenu {
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 9.5px;
+    }
+
+    .membershipCard {
+      height: 232px;
+      margin: 16px 0 32px;
+
+      .cardMenuItem {
+        height: 50px;
+        padding: 0 16px;
+        border-bottom: 1px solid rgb(237, 239, 240);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 20px;
+        color: $titleBlackColor;
+        background-color: rgb(248, 248, 249);
+        cursor: pointer;
+      }
+      .cardMenuItem:last-child {
+        border: 0px;
+      }
+    }
+
+    .menuCard {
+      height: 182px;
+
+      .cardMenuItem2 {
+        height: 50px;
+        padding: 0 16px;
+        border-bottom: 1px solid rgb(237, 239, 240);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20px;
+        color: $titleBlackColor;
+        background-color: rgb(248, 248, 249);
+        cursor: pointer;
+
+        span {
+          color: rgb(243, 51, 64);
+          font-weight: 900;
+        }
+      }
+      .cardMenuItem2:last-child {
+        border: 0px;
+      }
+    }
+  }
+
+  .rightContainer {
+    //border: 2px solid cadetblue;
+    width: 800px;
+
+    // .classHistory {
+    //   width: 776px;
+
+    //   .arrows {
+    //     margin-right: 5px;
+    //     display: flex;
+
+    //     .arrowContainer {
+    //       width: 32px;
+    //       height: 32px;
+    //       display: flex;
+    //       justify-content: center;
+    //       align-items: center;
+
+    //       &:hover {
+    //         border-radius: 3px;
+    //         color: rgb(27, 28, 29);
+    //         background-color: #f2f2f2;
+    //         transition: background-color 0.1s ease 0s;
+    //       }
+    //     }
+    //   }
+    // }
+  }
+}
