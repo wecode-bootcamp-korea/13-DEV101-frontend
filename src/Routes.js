@@ -3,6 +3,10 @@ import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import ClassCard from "./Components/ClassCard";
 import { ThemeProvider } from "styled-components";
+import Login from "./Pages/Login/Login";
+import LoginAnother from "./Pages/Login/LoginAnother";
+import SignUp from "./Pages/SignUp/SignUp";
+import Nav from "./Components/Nav/Nav";
 import theme from "./Styles/common";
 
 const Routes = () => {
@@ -10,11 +14,12 @@ const Routes = () => {
     // <Provider>
     <ThemeProvider theme={theme}>
       <Router>
-        {/* <Nav /> */}
         <Switch>
-          <Route path="/" component={ClassCard} />
+          <Route exact path="/" component={Nav} />
+          <Route exact path="/Login" component={Login} />
+          <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/LoginAnother" component={LoginAnother} />
         </Switch>
-        {/* <Footer /> */}
       </Router>
     </ThemeProvider>
     // </Provider>
