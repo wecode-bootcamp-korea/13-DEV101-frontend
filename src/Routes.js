@@ -5,7 +5,7 @@ import { ThemeProvider } from "styled-components";
 import Login from "./Pages/Login/Login";
 import LoginAnother from "./Pages/Login/LoginAnother";
 import SignUp from "./Pages/SignUp/SignUp";
-import Nav from "./Components/Nav/Nav";
+// import Nav from "./Components/Nav/Nav";
 import Main from "./Pages/Main/Main";
 import MyPage from "../src/Pages/MyPage/MyPage";
 import theme from "./Styles/common";
