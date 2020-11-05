@@ -6,11 +6,24 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { GrFacebook, GrApple } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
 
-const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) => {
+const LoginAnother = ({
+  isInputEmail,
+  isInputPw,
+  inputEmailId,
+  inputEmailPw,
+}) => {
   const BUTTONS = [
-    { flatform: "kakao", icon: <RiKakaoTalkFill />, desc: "카카오로 5초 만에 시작하기" },
+    {
+      flatform: "kakao",
+      icon: <RiKakaoTalkFill />,
+      desc: "카카오로 5초 만에 시작하기",
+    },
     { flatform: "naver", icon: "", desc: "네이버로 시작하기" },
-    { flatform: "facebook", icon: <GrFacebook />, desc: "페이스북으로 시작하기" },
+    {
+      flatform: "facebook",
+      icon: <GrFacebook />,
+      desc: "페이스북으로 시작하기",
+    },
     { flatform: "google", icon: <FcGoogle />, desc: "구글로 시작하기" },
     { flatform: "apple", icon: <GrApple />, desc: "애플로 시작하기" },
   ];
@@ -18,8 +31,6 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (values) => {
-    console.log(values);
-
     const loginAPI = "http://10.58.7.131:8000/user/signin";
 
     fetch(loginAPI, {
@@ -75,7 +86,9 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
                 minLength: 8,
               })}
             />
-            {errors.password?.type === "minLength" && <span>❗️8글자 이상 !!!</span>}
+            {errors.password?.type === "minLength" && (
+              <span>❗️8글자 이상 !!!</span>
+            )}
           </div>
           <div className="forgotPw">
             <span>비밀번호를 잊으셨나요?</span>
