@@ -5,7 +5,7 @@ const initialState = {
   infomation: {
     brand: 0,
     creatorName: "",
-    category: "공예",
+    category: "미술",
     subCategory: "",
     level: "입문자",
   },

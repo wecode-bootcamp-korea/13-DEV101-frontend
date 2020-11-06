@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Login from "./Pages/Login/Login";
 import LoginAnother from "./Pages/Login/LoginAnother";
@@ -11,6 +11,7 @@ import MyPage from "../src/Pages/MyPage/MyPage";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
+import Creators from "./Pages/Creators";
 const Routes = () => {
   return (
     <Provider store={store}>
@@ -25,6 +26,7 @@ const Routes = () => {
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/LoginAnother" component={LoginAnother} />
             <Route exact path="/myPage" component={MyPage} />
+            <Route exact path="/creators" component={Creators} />
           </Switch>
         </Router>
       </ThemeProvider>
