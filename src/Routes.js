@@ -7,6 +7,7 @@ import Login from "./Pages/Login/Login";
 import LoginAnother from "./Pages/Login/LoginAnother";
 import SignUp from "./Pages/SignUp/SignUp";
 import Nav from "./Components/Nav/Nav";
+import MyPage from "../src/Pages/MyPage/MyPage";
 import theme from "./Styles/common";
 
 const Routes = () => {
@@ -19,6 +20,7 @@ const Routes = () => {
           <Route exact path="/Login" component={Login} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/LoginAnother" component={LoginAnother} />
+          <Route exact path="/myPage" component={MyPage} />
         </Switch>
       </Router>
     </ThemeProvider>

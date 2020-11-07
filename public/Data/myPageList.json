@@ -1,0 +1,12 @@
+{
+  "myPageList": {
+    "pointList": ["500P", "1000P", "1500P", "2000P", "2500P", "3000P", "3500P"],
+    "membershipList": ["Libre", "Signature+", "money+", "Kids"],
+
+    "menuList": [
+      "친구 초대하고 <span>30,000원 쿠폰</span> 받기",
+      "클래스101 앱 설치하기",
+      "크리에이터 센터 가기"
+    ]
+  }
+}
