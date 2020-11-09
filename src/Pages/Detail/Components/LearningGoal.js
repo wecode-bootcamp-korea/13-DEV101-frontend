@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import axios from "axios";
 import styled from "styled-components";
-import { API } from "./Utils";
+import { useSelector } from "react-redux";
 
 const LearningGoal = () => {
-  const [swiperData, setSwiperData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(API)
-      .then((res) => setSwiperData(res.data.detail.class_info.to_learn));
-  }, []);
+  const to_learn = useSelector(
+    (state) => state.DetailReducer.detail.class_info?.to_learn,
+  );
 
   return (
     <LearningGoalWrap>
@@ -21,10 +16,9 @@ const LearningGoal = () => {
         slidesPerView={2.5}
         scrollbar={{ draggable: true }}
       >
-        {swiperData.map(({ title, description, image_url }) => (
+        {to_learn?.map(({ title, description, image_url }) => (
           <SwiperSlide>
             <span>
-              {/* <h4>{title}</h4> */}
               <p>{description}</p>
               <img src={image_url} alt="Learnning" />
             </span>

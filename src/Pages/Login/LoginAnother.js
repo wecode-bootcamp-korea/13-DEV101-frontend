@@ -31,8 +31,6 @@ const LoginAnother = ({
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (values) => {
-    console.log(values);
-
     const loginAPI = "http://10.58.7.131:8000/user/signin";
 
     fetch(loginAPI, {

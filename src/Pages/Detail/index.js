@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { AiFillExclamationCircle } from "react-icons/ai";
+import { useParams } from "react-router-dom";
 import Aside from "./Aside";
 import Banner from "./Components/Banner";
 import Review from "./Components/Review";
@@ -12,7 +13,15 @@ import Community from "./Components/Community";
 import HeadModal from "./Components/HeadModal";
 import { Hr } from "./Components/Utils";
 import TopHeader from "./TopHeader";
-import { getClassInfo } from "../../store/DetailReducer";
+import {
+  getClassInfo,
+  getHeaderImages,
+  getClassReviews,
+  getClassCommunity,
+  getNotice,
+  getDetailAside,
+  getProductId,
+} from "../../store/DetailReducer";
 import { API } from "./Components/Utils";
 
 const SLICK_WIDTH = 850;
@@ -24,6 +33,10 @@ const Detail = () => {
   const [slickWidth, setSlickWidth] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { id: classId } = useParams();
+
+  console.log(classId);
+
   const { detail, headerImages } = useSelector((store) => store.DetailReducer);
   const dispatch = useDispatch();
   const focusTarget = useRef([]);
@@ -33,8 +46,14 @@ const Detail = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", scrollEvent);
-    axios.get(API).then((res) => {
+    axios.get(`${API}${classId}`).then((res) => {
       dispatch(getClassInfo(res.data.detail));
+      dispatch(getHeaderImages(res.data.header_images));
+      dispatch(getClassReviews(res.data.reviews));
+      dispatch(getClassCommunity(res.data.community));
+      dispatch(getNotice(res.data.notice));
+      dispatch(getProductId(classId));
+      dispatch(getDetailAside(res.data.detail_aside));
     });
     return () => {
       window.removeEventListener("scroll", scrollEvent);

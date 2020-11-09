@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled, { css } from "styled-components";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   AiOutlineHeart,
   AiOutlineYoutube,
@@ -11,7 +12,7 @@ import {
   AiFillHeart,
 } from "react-icons/ai";
 import Button from "./Components/Button";
-import { Hr, API, Tooltip } from "./Components/Utils";
+import { Hr, APILIKE, Tooltip } from "./Components/Utils";
 
 const Aside = () => {
   const [category, setCategory] = useState("");
@@ -22,11 +23,9 @@ const Aside = () => {
   const [isHeartToggle, setIsHeartToggle] = useState(false);
   const [level, setLevel] = useState("");
   const history = useHistory();
-
-  useEffect(() => {
-    axios.get(API).then((res) => setLevel(res.data.detail.class_info.level));
-  }, []);
-
+  const { detailAside, productId } = useSelector(
+    (state) => state.DetailReducer,
+  );
   const contentItems = [
     [<AiOutlineYoutube size="18" />, <span>콘텐츠 이용권</span>],
     [<AiFillGift size="18" />, <span>준비물 키트</span>],
@@ -35,33 +34,44 @@ const Aside = () => {
   ];
 
   useEffect(() => {
-    axios.get(API).then((res) => {
-      setCategory(res.data.detail_aside.category);
-      setCreatorName(res.data.detail_aside.creator_name);
-      setClassTitle(res.data.detail_aside.title);
-      // setStatus(res.data.detail_aside.status);
-      setPrice(Number(res.data.detail_aside.price).toLocaleString("en"));
-      setHeartCount(res.data.detail_aside.heart);
-    });
-  }, []);
+    const {
+      category,
+      creator_name,
+      title,
+      liked,
+      level,
+      price,
+      heart,
+    } = detailAside;
+    setCategory(category);
+    setCreatorName(creator_name);
+    setClassTitle(title);
+    setIsHeartToggle(liked);
+    setLevel(level);
+    // setStatus(res.data.detail_aside.status);
+    setPrice(Number(price).toLocaleString("en"));
+    setHeartCount(heart);
+  }, [detailAside]);
 
   const classRequest = (id) => {
-    history.push(`/detail/${id}/payment`);
+    history.push(`/detail/${productId}/payment`);
   };
 
   const heartButtonClick = () => {
-    if (!isHeartToggle) {
-      setHeartCount((prevState) => prevState + 1);
-      setIsHeartToggle(true);
-    } else {
-      const result = window.confirm(
-        "정말로 취소하시겠습니까? 알림 및 혜택을 받지 못하실 수 있습니다.",
-      );
-      if (result) {
-        setHeartCount((prevState) => prevState - 1);
-        setIsHeartToggle(false);
+    axios.post(APILIKE).then((res) => {
+      if (!isHeartToggle) {
+        setHeartCount(res.data.like_count);
+        setIsHeartToggle(true);
+      } else {
+        const result = window.confirm(
+          "정말로 취소하시겠습니까? 알림 및 혜택을 받지 못하실 수 있습니다.",
+        );
+        if (result) {
+          setHeartCount(res.data.like_count);
+          setIsHeartToggle(false);
+        }
       }
-    }
+    });
   };
 
   return (

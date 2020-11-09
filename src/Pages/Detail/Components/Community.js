@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { useSelector } from "react-redux";
 import Button from "./Button";
 import CommunityPost from "./CommunityPost";
 import CreateMessage from "./CreatorMessage";
-import { API } from "./Utils";
 
 const Community = ({ focusTarget }) => {
   const [more, setMore] = useState(false);
-  const [community, setCommunity] = useState([]);
+  const [communitys, setCommunitys] = useState([]);
+  const { community } = useSelector((state) => state.DetailReducer);
 
   const getComment = () => {
-    axios.get(API).then((res) => setCommunity(res.data.community));
+    setCommunitys(community);
     setMore(true);
   };
 
   useEffect(() => {
-    axios.get(API).then((res) => setCommunity(res.data.community.slice(0, 5)));
-  }, []);
+    setCommunitys(community.slice(0, 5));
+  }, [community]);
 
   return (
     <CommunityWrap>
@@ -31,9 +31,10 @@ const Community = ({ focusTarget }) => {
         </Button>
       </div>
       <CreateMessage />
-      {community?.map((post, idx) => (
+      {communitys?.map((post, idx) => (
         <CommunityPost
           key={idx}
+          post_id={post.post_id}
           img={post.profile_image}
           comments={post.comments}
           nickname={post.nickname}

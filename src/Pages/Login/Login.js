@@ -29,7 +29,6 @@ const Login = () => {
   const history = useHistory();
 
   const loginWithKakao = () => {
-    console.log(Kakao.Auth);
     Kakao.Auth.login({
       success: function (authObj) {
         fetch(KakaoAPI, {

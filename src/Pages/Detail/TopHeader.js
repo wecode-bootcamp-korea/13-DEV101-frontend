@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { getHeaderImages } from "../../store/DetailReducer";
-import { API } from "./Components/Utils";
 
 const TopHeader = ({ handleModal }) => {
-  const dispatch = useDispatch();
-  const { headerImages } = useSelector((state) => state.DetailReducer);
+  const headerImages = useSelector((state) => state.DetailReducer.headerImages);
   const [Main, Sub1, Sub2, Sub3] = headerImages;
-
-  useEffect(() => {
-    axios.get(API).then((res) => {
-      dispatch(getHeaderImages(res.data.header_images));
-    });
-  }, []);
 
   return (
     <TopHeaderWrap>

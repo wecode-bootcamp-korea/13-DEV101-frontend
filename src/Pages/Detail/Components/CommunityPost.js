@@ -2,15 +2,26 @@ import React, { useState, useRef } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { AiOutlinePlus, AiOutlineSend } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
 import CommunityComment from "./CommunityComment";
-import { Hr, APIPOST, ProfileImages } from "./Utils";
+import { getClassCommunity } from "../../../store/DetailReducer";
+import { Hr, API, ProfileImages } from "./Utils";
 
-const CommunityPost = ({ img, nickname, date, children, comments }) => {
+const CommunityPost = ({
+  img,
+  nickname,
+  date,
+  children,
+  comments,
+  post_id,
+}) => {
   const fileRef = useRef();
+  const dispatch = useDispatch();
   const [currentFile, setCurrentFile] = useState(null);
   const [currentComment, setCurrentComment] = useState("");
   const [imgBase64, setImgBase64] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+
+  const productId = useSelector((state) => state.DetailReducer.productId);
 
   const fileHandler = (e) => {
     let reader = new FileReader();
@@ -40,22 +51,30 @@ const CommunityPost = ({ img, nickname, date, children, comments }) => {
   };
 
   const PostCommnet = async () => {
+    console.log(post_id);
     const formData = new FormData();
     formData.append("user_id", 1);
-    formData.append("file", currentFile, currentFile.name);
+    if (currentFile?.name) {
+      formData.append("file", currentFile, currentFile.name);
+    }
     formData.append("content", currentComment);
     try {
-      const res = await axios.post(APIPOST, formData, {
+      await axios.post(`${API}${productId}/post/${post_id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      setImageUrl(res.data.image_url);
-      setCurrentFile([]);
-      setCurrentComment("");
+      await axios.get(`${API}${productId}`).then((res) => {
+        console.log(res.data);
+        dispatch(getClassCommunity(res.data.community));
+      });
+      // console.log(community);
     } catch (err) {
       console.error(err);
     }
+    setCurrentFile([]);
+    setCurrentComment("");
+    setImgBase64("");
   };
 
   return (
@@ -75,6 +94,7 @@ const CommunityPost = ({ img, nickname, date, children, comments }) => {
         <CommunityComment
           key={idx}
           img={comment.profile_image}
+          contentImg={comment.comment_image_url}
           nickname={comment.nickname}
           date={comment.date}
         >

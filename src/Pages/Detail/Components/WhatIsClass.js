@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { API } from "./Utils";
+import { useSelector } from "react-redux";
 import { AiOutlineCopy, AiOutlineCalendar } from "react-icons/ai";
 
 const WhatIsClass = () => {
-  const [whatClass, setWhatClass] = useState({});
-  const { sub_chapter, level, class_detail } = whatClass;
+  const { class_info } = useSelector((state) => state.DetailReducer.detail);
 
-  useEffect(() => {
-    axios.get(API).then((res) => {
-      setWhatClass(res.data.detail.class_info);
-    });
-  }, []);
   return (
     <WhatIsClassWrap>
       <div className="whatClass">
         <h3>
-          <span>{level}</span>분들을 위한
+          <span>{class_info?.level}</span>분들을 위한
         </h3>
         <h3>
-          <span>{class_detail}</span>
+          <span>{class_info?.class_detail}</span>
         </h3>
         <h3>클래스입니다.</h3>
       </div>
@@ -32,8 +25,8 @@ const WhatIsClass = () => {
         </div>
         <div>
           <AiOutlineCopy size={28} />
-          <div>{sub_chapter}개 컨텐츠</div>
-          <p>총 {sub_chapter}개의 강의를 수강하실 수 있습니다</p>
+          <div>{class_info?.sub_chapter}개 컨텐츠</div>
+          <p>총 {class_info?.sub_chapter}개의 강의를 수강하실 수 있습니다</p>
         </div>
       </div>
     </WhatIsClassWrap>

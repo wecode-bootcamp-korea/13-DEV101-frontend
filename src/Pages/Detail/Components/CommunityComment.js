@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ProfileImages } from "./Utils";
 
-const CommunityComment = ({ img, profile_image, nickname, date, children }) => {
+const CommunityComment = ({ img, contentImg, nickname, date, children }) => {
   return (
     <CommunityCommentWrap>
       <div>
@@ -12,6 +12,11 @@ const CommunityComment = ({ img, profile_image, nickname, date, children }) => {
           <p>{date}</p>
         </div>
       </div>
+      {contentImg && (
+        <div className="contentImage">
+          <img src={contentImg} alt="commentImg" />
+        </div>
+      )}
       <span>{children}</span>
     </CommunityCommentWrap>
   );
@@ -25,12 +30,6 @@ const CommunityCommentWrap = styled.div`
   > div {
     display: flex;
     align-items: center;
-
-    img {
-      border-radius: 50%;
-      width: 23px;
-      height: 23px;
-    }
 
     > div {
       display: flex;
@@ -49,9 +48,20 @@ const CommunityCommentWrap = styled.div`
       }
     }
   }
+  .contentImage {
+    display: flex;
+    justify-content: center;
+    margin: 0 30px;
+    padding: 10px 0;
+    padding-left: 24px;
+    max-width: 400px;
+    img {
+      width: 100%;
+    }
+  }
 
   span {
-    padding-left: 34px;
+    padding-left: 54px;
     font-size: 14px;
     line-height: 18px;
   }

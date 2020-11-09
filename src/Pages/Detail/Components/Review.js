@@ -1,20 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { Hr, API } from "./Utils";
-import { getClassReviews } from "../../../store/DetailReducer";
+import { useSelector } from "react-redux";
+import { Hr } from "./Utils";
 import ReviewComment from "./ReviewComment";
 
 const Review = () => {
   const { reviews } = useSelector((store) => store.DetailReducer);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    axios.get(API).then((res) => {
-      dispatch(getClassReviews(res.data.reviews));
-    });
-  }, []);
 
   return (
     <ReviewWrap>

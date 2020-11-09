@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Styled from "styled-components";
-import axios from "axios";
 import SwiperCore, { Pagination } from "swiper";
+import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { API, ProfileImages } from "./Utils";
+import { ProfileImages } from "./Utils";
 import "swiper/swiper.scss";
 import "swiper/components/pagination/pagination.scss";
 
 SwiperCore.use([Pagination]);
 
 const CreatorMessage = () => {
-  const [notice, setNotice] = useState([]);
-
-  useEffect(() => {
-    axios.get(API).then((res) => {
-      setNotice(res.data.notice);
-    });
-  }, []);
+  const { notice } = useSelector((state) => state.DetailReducer);
 
   return (
     <CreatorWrap>
@@ -25,8 +19,6 @@ const CreatorMessage = () => {
         slidesPerView={1}
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
       >
         {notice.map(({ profile_image, nickname, date, description }) => (
           <SwiperSlide>
