@@ -6,9 +6,17 @@ import { FcGoogle } from "react-icons/fc";
 
 const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
   const BUTTONS = [
-    { flatform: "kakao", icon: <RiKakaoTalkFill />, desc: "카카오로 3초 만에 시작하기" },
+    {
+      flatform: "kakao",
+      icon: <RiKakaoTalkFill />,
+      desc: "카카오로 3초 만에 시작하기",
+    },
     { flatform: "naver", icon: "", desc: "네이버로 시작하기" },
-    { flatform: "facebook", icon: <GrFacebook />, desc: "페이스북으로 시작하기" },
+    {
+      flatform: "facebook",
+      icon: <GrFacebook />,
+      desc: "페이스북으로 시작하기",
+    },
     { flatform: "google", icon: <FcGoogle />, desc: "구글로 시작하기" },
     { flatform: "apple", icon: <GrApple />, desc: "애플로 시작하기" },
   ];
@@ -22,12 +30,20 @@ const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
         <form>
           <div className="userName">
             <p>이름</p>
-            <input value={isInput} onChange={handleInput} placeholder="홍길동" />
+            <input
+              value={isInput}
+              onChange={handleInput}
+              placeholder="홍길동"
+            />
             {!isValidEmail && <span>이름을 입력해주세요.</span>}
           </div>
           <div className="email">
             <p>이메일</p>
-            <input value={isInput} onChange={handleInput} placeholder="example@example.com" />
+            <input
+              value={isInput}
+              onChange={handleInput}
+              placeholder="example@example.com"
+            />
             {!isValidPw && <span>이메일을 입력해주세요.</span>}
           </div>
           <div className="phoneNumber">
@@ -41,12 +57,20 @@ const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
           </div>
           <div className="password">
             <p>비밀번호(8자 이상)</p>
-            <input value={isInput} onChange={handleInput} placeholder="********" />
+            <input
+              value={isInput}
+              onChange={handleInput}
+              placeholder="********"
+            />
             {!isValidPw && <span>패스워드를 입력해주세요.</span>}
           </div>
           <div className="passwordConfirm">
             <p>비밀번호 확인</p>
-            <input value={isInput} onChange={handleInput} placeholder="********" />
+            <input
+              value={isInput}
+              onChange={handleInput}
+              placeholder="********"
+            />
             {!isValidPw && <span>패스워드 확인을 입력해주세요.</span>}
           </div>
           <Button>동의하고 회원가입</Button>

@@ -20,7 +20,9 @@ const timePassed = (time) => {
     const day = Math.floor(seconds / 86400);
     const hour = Math.floor((seconds - day * 86400) / 3600);
     const minute = Math.floor((seconds - day * 86400 - hour * 3600) / 60);
-    return `${day ? day + "일 " : ""}${hour ? hour + "시간 " : ""}${minute ? minute + "분 " : ""}`;
+    return `${day ? day + "일 " : ""}${hour ? hour + "시간 " : ""}${
+      minute ? minute + "분 " : ""
+    }`;
   }
 };
 
@@ -62,7 +64,11 @@ const ClassCard = ({
             alt="ClassThumbnails"
           />
           <LikeBtn onClick={() => setIsLiked(!isLiked)}>
-            {isLiked ? <FaHeart fill="#f33340" /> : <FaRegHeart fill="#f8f8f8" />}
+            {isLiked ? (
+              <FaHeart fill="#f33340" />
+            ) : (
+              <FaRegHeart fill="#f8f8f8" />
+            )}
           </LikeBtn>
         </HoverImgBox>
         <TextDiv>
@@ -92,11 +98,15 @@ const ClassCard = ({
           ) : price ? (
             <>
               <p>
-                <CentereLinedSpan>{Number(price).toLocaleString()}원</CentereLinedSpan>
+                <CentereLinedSpan>
+                  {Number(price).toLocaleString()}원
+                </CentereLinedSpan>
                 <span className="red">{discount * 100}%</span>
               </p>
               <p>
-                <Bold className="cost">월 {Math.floor(pricePerMonth).toLocaleString()}원</Bold>
+                <Bold className="cost">
+                  월 {Math.floor(pricePerMonth).toLocaleString()}원
+                </Bold>
                 <span>(5개월)</span>
               </p>
             </>
@@ -112,7 +122,7 @@ const ClassCard = ({
 };
 
 const ClassCardComponent = styled.div`
-  width: ${(props) => props.cardWidth || 267}px;
+  width: ${({ cardWidth }) => cardWidth || 267}px;
 `;
 
 const HoverImgBox = styled.div`
