@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import LoginAnother from "./LoginAnother";
-import axios from "axios";
 import styled from "styled-components";
 import { RiEarthFill, RiKakaoTalkFill } from "react-icons/ri";
 import { useHistory } from "react-router-dom";
@@ -161,6 +160,6 @@ const Button = styled.button`
   font-weight: 700;
   margin-top: 10px;
   border: none;
-  background-color: ${(props) => (props.kakao ? "#ffe812" : "#f8f8f9")};
-  color: ${(props) => (props.kakao ? "#000000" : "#3e4042")};
+  background-color: ${(kakao) => (kakao ? "#ffe812" : "#f8f8f9")};
+  color: ${(kakao) => (kakao ? "#000000" : "#3e4042")};
 `;

@@ -1,0 +1,16 @@
+{
+  "userInfo": {
+    "name": "함준호",
+    "phoneNumber": "01099998888"
+  },
+  "currentClassInfo": {
+    "creatorName": "위코드",
+    "classTitle": "위코드 코딩 클래스",
+    "classImg" : "",
+    "discount": 31,
+    "totalAmount": 300000,
+    "discountAmount": 0,
+    "currentAmount": 300000,
+    "fivePlanAmount": 99999
+  }
+}

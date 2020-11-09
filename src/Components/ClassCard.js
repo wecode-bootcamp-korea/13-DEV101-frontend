@@ -131,6 +131,7 @@ const HoverImgBox = styled.div`
   position: relative;
   border-radius: 5px;
   overflow: hidden;
+
   span {
     display: inline-block;
     position: absolute;

@@ -179,7 +179,7 @@ const Detail = () => {
             <Community focusTarget={focusTarget} />
           </div>
         </div>
-        <Aside />
+        <Aside classId={classId} />
         {isTopModal && (
           <HeadModal
             handleModal={handleModal}

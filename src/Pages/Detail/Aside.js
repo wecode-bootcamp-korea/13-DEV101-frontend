@@ -14,7 +14,7 @@ import {
 import Button from "./Components/Button";
 import { Hr, APILIKE, Tooltip } from "./Components/Utils";
 
-const Aside = () => {
+const Aside = ({ classId }) => {
   const [category, setCategory] = useState("");
   const [creatorName, setCreatorName] = useState("");
   const [classTitle, setClassTitle] = useState("");
@@ -23,9 +23,7 @@ const Aside = () => {
   const [isHeartToggle, setIsHeartToggle] = useState(false);
   const [level, setLevel] = useState("");
   const history = useHistory();
-  const { detailAside, productId } = useSelector(
-    (state) => state.DetailReducer,
-  );
+  const { detailAside } = useSelector((state) => state.DetailReducer);
   const contentItems = [
     [<AiOutlineYoutube size="18" />, <span>콘텐츠 이용권</span>],
     [<AiFillGift size="18" />, <span>준비물 키트</span>],
@@ -53,8 +51,8 @@ const Aside = () => {
     setHeartCount(heart);
   }, [detailAside]);
 
-  const classRequest = (id) => {
-    history.push(`/detail/${productId}/payment`);
+  const classRequest = () => {
+    history.push(`/detail/${classId}/package`);
   };
 
   const heartButtonClick = () => {
