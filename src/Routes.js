@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import { Provider } from "react-redux";
+import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
@@ -12,6 +11,10 @@ import SearchPage from "./Pages/SearchPage/SearchPage";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
+import Nav from "./Components/Nav/Nav";
+import PackageSelector from "./Pages/PackageSelector";
+import Payment from "./Pages/Payment";
+import CardPayment from "./Pages/CardPayment";
 const Routes = () => {
   return (
     <Provider store={store}>
@@ -27,6 +30,12 @@ const Routes = () => {
             <Route exact path="/myPage" component={MyPage} />
             <Route exact path="/searchPage/" component={SearchPage} />
             <Route exact path="/searchPage/:searchVal" component={SearchPage} />
+            <Route exact path="/detail/:id/package" component={PackageSelector} />
+            <Route exact path="/detail/:id/payment" component={Payment} />
+            <Route exact path="/detail/:id/cardpayment" component={CardPayment} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/LoginAnother" component={LoginAnother} />
           </Switch>
         </Router>
       </ThemeProvider>

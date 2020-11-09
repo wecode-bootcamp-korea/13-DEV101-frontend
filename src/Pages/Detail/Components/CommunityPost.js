@@ -45,7 +45,6 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
 
   const PostCommnet = async (e) => {
     e.preventDefault();
-    console.log(post_id);
     const formData = new FormData();
     formData.append("user_id", 1);
     if (currentFile?.name) {
@@ -59,7 +58,6 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
         },
       });
       await axios.get(`${API}${productId}`).then((res) => {
-        console.log(res.data);
         dispatch(getClassCommunity(res.data.community));
       });
     } catch (err) {
