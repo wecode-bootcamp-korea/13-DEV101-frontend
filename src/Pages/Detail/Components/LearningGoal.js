@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
-import { API } from "./Utils";
 import styled from "styled-components";
+import { API } from "./Utils";
 
 const LearningGoal = () => {
   const [swiperData, setSwiperData] = useState([]);
@@ -20,15 +20,13 @@ const LearningGoal = () => {
         spaceBetween={0}
         slidesPerView={2.5}
         scrollbar={{ draggable: true }}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
       >
         {swiperData.map(({ title, description, image_url }) => (
           <SwiperSlide>
             <span>
               {/* <h4>{title}</h4> */}
               <p>{description}</p>
-              <img src={image_url} alt="" />
+              <img src={image_url} alt="Learnning" />
             </span>
           </SwiperSlide>
         ))}
@@ -41,30 +39,36 @@ export default LearningGoal;
 
 const LearningGoalWrap = styled.div`
   margin-bottom: 50px;
+
   h2 {
     font-size: 25px;
     font-weight: 600;
     padding: 20px 0;
   }
+
   div {
     width: 100%;
     overflow-x: hidden;
     user-select: none;
     cursor: pointer;
+
     div {
       width: max-content;
       display: flex;
       flex-flow: nowrap;
       /* flex-wrap: nowrap; */
+
       span {
         width: 304px;
         margin: 18px;
+
         p {
           color: gray;
           font-size: 14px;
           line-height: 20px;
           padding: 8px 0 12px;
         }
+
         img {
           width: 304px;
           height: 200px;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { ProfileImages } from "./Utils";
 
 const ReviewComment = ({ img, nickname, date, children }) => {
   return (
@@ -10,16 +11,7 @@ const ReviewComment = ({ img, nickname, date, children }) => {
       children={children}
     >
       <div>
-        <div className="profileImage">
-          <img
-            src={
-              img
-                ? img
-                : "https://ssl.pstatic.net/static/pwe/address/img_profile.png"
-            }
-            alt=""
-          />
-        </div>
+        <ProfileImages img={img} />
         <div className="profileInfo">
           <span className="nickname">{nickname}</span>
           <p>{date}</p>
@@ -34,23 +26,20 @@ export default ReviewComment;
 
 const ReviewCommentWrap = styled.div`
   margin-bottom: 10px;
+
   > div {
     display: flex;
     align-items: center;
-    .profileImage {
-      img {
-        width: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
-    }
+
     .profileInfo {
       display: flex;
       flex-direction: column;
+
       .nickname {
         font-size: 11px;
         font-weight: 600;
       }
+
       p {
         color: gray;
         font-size: 9px;
@@ -58,6 +47,7 @@ const ReviewCommentWrap = styled.div`
       }
     }
   }
+
   .contents {
     display: flex;
     flex: 1;

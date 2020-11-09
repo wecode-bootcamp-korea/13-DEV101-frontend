@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 const Banner = ({ children, bgcolor, color, radius, weight }) => {
   return (
     <BannerWrap bgcolor={bgcolor} color={color} radius={radius} weight={weight}>
@@ -13,23 +14,27 @@ const BannerWrap = styled.div`
   position: relative;
   justify-content: space-between;
   align-items: center;
-  background: ${(props) => props.bgcolor || "black"};
-  color: ${(props) => props.color || "white"};
+  background: ${({ bgcolor }) => bgcolor || "black"};
+  color: ${({ color }) => color || "white"};
   margin-bottom: 20px;
-  border-radius: ${(props) => props.radius || 0};
+  border-radius: ${({ radius }) => radius || 0};
+
   div {
     padding: 24px;
     display: flex;
     flex-direction: column;
   }
+
   span {
     font-weight: 600;
   }
+
   p {
     padding-top: 10px;
     font-size: 10px;
     font-weight: 400;
   }
+
   img {
     position: absolute;
     top: 0;

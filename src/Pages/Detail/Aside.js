@@ -18,8 +18,8 @@ const Aside = () => {
   const [creatorName, setCreatorName] = useState("");
   const [classTitle, setClassTitle] = useState("");
   const [price, setPrice] = useState("");
-  const [heart, setHeart] = useState(0);
-  const [heartToggle, setHeartToggle] = useState(false);
+  const [heartCount, setHeartCount] = useState(0);
+  const [isHeartToggle, setIsHeartToggle] = useState(false);
   const [level, setLevel] = useState("");
   const history = useHistory();
 
@@ -27,7 +27,7 @@ const Aside = () => {
     axios.get(API).then((res) => setLevel(res.data.detail.class_info.level));
   }, []);
 
-  const contentItem = [
+  const contentItems = [
     [<AiOutlineYoutube size="18" />, <span>콘텐츠 이용권</span>],
     [<AiFillGift size="18" />, <span>준비물 키트</span>],
     [<AiOutlineUser size="18" />, <span>{level} 대상</span>],
@@ -41,26 +41,25 @@ const Aside = () => {
       setClassTitle(res.data.detail_aside.title);
       // setStatus(res.data.detail_aside.status);
       setPrice(Number(res.data.detail_aside.price).toLocaleString("en"));
-      setHeart(res.data.detail_aside.heart);
+      setHeartCount(res.data.detail_aside.heart);
     });
   }, []);
 
-  const classRequest = () => {
-    history.push("/detail/id/payment");
+  const classRequest = (id) => {
+    history.push(`/detail/${id}/payment`);
   };
 
   const heartButtonClick = () => {
-    if (!heartToggle) {
-      console.log(heart);
-      setHeart((prevState) => prevState + 1);
-      setHeartToggle(true);
+    if (!isHeartToggle) {
+      setHeartCount((prevState) => prevState + 1);
+      setIsHeartToggle(true);
     } else {
       const result = window.confirm(
         "정말로 취소하시겠습니까? 알림 및 혜택을 받지 못하실 수 있습니다.",
       );
       if (result) {
-        setHeart((prevState) => prevState - 1);
-        setHeartToggle(false);
+        setHeartCount((prevState) => prevState - 1);
+        setIsHeartToggle(false);
       }
     }
   };
@@ -80,11 +79,11 @@ const Aside = () => {
           <h4>월 {price}원</h4>
         </span>
         <Hr />
-        <div className="contentinfo">
-          {contentItem.map((content) => (
+        <div className="contentInfo">
+          {contentItems.map(([icon, desc]) => (
             <div>
-              {content[0]}
-              <span>{content[1]}</span>
+              {icon}
+              <span>{desc}</span>
             </div>
           ))}
         </div>
@@ -92,7 +91,7 @@ const Aside = () => {
         <div className="buttons">
           <Tooltip />
           <Button
-            onClick={classRequest}
+            onClick={() => classRequest("productid")}
             bgcolor="#ff922b"
             color="#fff"
             subText="6개 남음"
@@ -102,13 +101,13 @@ const Aside = () => {
           <div onClick={heartButtonClick} className="heartButton">
             <div>
               <span>
-                {heartToggle ? (
+                {isHeartToggle ? (
                   <AiFillHeart style={{ color: "#fc3d46" }} />
                 ) : (
                   <AiOutlineHeart />
                 )}
               </span>
-              <span>{heart}</span>
+              <span>{heartCount}</span>
             </div>
           </div>
         </div>
@@ -119,7 +118,7 @@ const Aside = () => {
           <p>Dev101 온라인 클래스</p>
         </div>
         <div>
-          <img src="https://class101.net/images/im-logo-block.png" alt="" />
+          <img src="https://class101.net/images/im-logo-block.png" alt="logo" />
         </div>
       </div>
     </AsideWrap>
@@ -186,7 +185,7 @@ const AsideWrap = styled.div`
       }
     }
 
-    .contentinfo {
+    .contentInfo {
       display: flex;
       flex-wrap: wrap;
 
@@ -255,7 +254,7 @@ const AsideWrap = styled.div`
       }
     }
   }
-  @media ${(props) => props.theme.tabletS} {
+  @media ${({ theme }) => theme.tabletS} {
     position: static;
     width: 100%;
     order: -1;

@@ -1,37 +1,37 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
-  Detail: {},
-  Reviews: {},
-  Community: [],
-  HeaderImages: [],
+  detail: {},
+  reviews: {},
+  community: [],
+  headerImages: [],
 };
 
-export const GetClassInfo = createAction("GET_CLASS_INFO");
-export const GetClassReviews = createAction("GET_CLASS_REVIEWS");
-export const GetClassCommunity = createAction("GET_CLASS_COMMUMITY");
-export const GetHeaderImages = createAction("GET_HEADER_IMAGES");
+export const getClassInfo = createAction("GET_CLASS_INFO");
+export const getClassReviews = createAction("GET_CLASS_REVIEWS");
+export const getClassCommunity = createAction("GET_CLASS_COMMUMITY");
+export const getHeaderImages = createAction("GET_HEADER_IMAGES");
 
 const DetailReducer = createReducer(initialState, {
-  [GetClassInfo]: (state, action) => {
-    state.Detail = action.payload;
+  [getClassInfo]: (state, action) => {
+    state.detail = action.payload;
   },
-  [GetClassReviews]: (state, action) => {
-    state.Reviews = action.payload;
+  [getClassReviews]: (state, action) => {
+    state.reviews = action.payload;
   },
-  [GetClassCommunity]: (state, action) => {
-    state.Community = action.payload;
+  [getClassCommunity]: (state, action) => {
+    state.community = action.payload;
   },
-  [GetHeaderImages]: (state, action) => {
-    state.HeaderImages = action.payload;
+  [getHeaderImages]: (state, action) => {
+    state.headerImages = action.payload;
   },
 });
 
 export const actionCreators = {
-  GetClassInfo,
-  GetClassReviews,
-  GetClassCommunity,
-  GetHeaderImages,
+  getClassInfo,
+  getClassReviews,
+  getClassCommunity,
+  getHeaderImages,
 };
 
 export default DetailReducer;

@@ -25,18 +25,20 @@ const Button = ({
 };
 
 const ButtonStyle = styled.div`
-  ${({ theme }) => theme.flexCenters}
-  background: ${(props) => props.bgcolor || "black"};
-  color: ${(props) => props.color || "white"};
-  width: ${(props) => props.width || "100%"};
+  ${({ theme }) => theme.flexCenterXY}
+  background: ${({ bgcolor }) => bgcolor || "black"};
+  color: ${({ color }) => color || "white"};
+  width: ${({ width }) => width || "100%"};
   padding: 15px;
   border-radius: ${({ theme }) => theme.radius.small};
-  font-weight: ${(props) => props.weight || "600"};
+  font-weight: ${({ weight }) => weight || "600"};
   text-align: center;
   cursor: pointer;
+
   span {
     padding: 0 5px;
   }
+
   p {
     font-size: 11px;
     font-weight: 400;

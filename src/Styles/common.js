@@ -28,9 +28,9 @@ const paddings = {
 };
 
 const radius = {
-  small: 3,
-  base: 4,
-  lg: 8,
+  small: "3px",
+  base: "4px",
+  lg: "8px",
 };
 
 const colors = {
@@ -47,7 +47,9 @@ const theme = {
   paddings,
   radius,
   colors,
-  flexCenters: "display: flex; justify-content: center; align-items: center;",
+  flexCenterXY: "display: flex; justify-content: center; align-items: center;",
+  flexCenterX: "display: flex; justify-content: center;",
+  flexCenterY: "display: flex; align-items: center;",
   wideSize: "top:0; left:0; right:0; bottom:0;",
   contentWrapperWidth: "1176px",
   mobile: `(max-width: ${size.mobile})`,

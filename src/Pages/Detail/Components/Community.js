@@ -5,6 +5,7 @@ import Button from "./Button";
 import CommunityPost from "./CommunityPost";
 import CreateMessage from "./CreatorMessage";
 import { API } from "./Utils";
+
 const Community = ({ focusTarget }) => {
   const [more, setMore] = useState(false);
   const [community, setCommunity] = useState([]);
@@ -30,19 +31,17 @@ const Community = ({ focusTarget }) => {
         </Button>
       </div>
       <CreateMessage />
-      {community?.map(
-        ({ profile_image, nickname, date, description, comments }, i) => (
-          <CommunityPost
-            key={i}
-            img={profile_image}
-            comments={comments}
-            nickname={nickname}
-            date={date}
-          >
-            {description}
-          </CommunityPost>
-        ),
-      )}
+      {community?.map((post, idx) => (
+        <CommunityPost
+          key={idx}
+          img={post.profile_image}
+          comments={post.comments}
+          nickname={post.nickname}
+          date={post.date}
+        >
+          {post.description}
+        </CommunityPost>
+      ))}
       {!more && (
         <Button bgcolor="#f8f8f9" color="black" onClick={getComment}>
           더보기
@@ -59,13 +58,16 @@ const CommunityWrap = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
+
     .title {
       align-items: center;
       display: flex;
+
       h2 {
         font-size: 25px;
         font-weight: 600;
       }
+
       p {
         padding: 0 8px;
         font-size: 14px;

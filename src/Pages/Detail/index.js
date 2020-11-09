@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { AiFillExclamationCircle } from "react-icons/ai";
 import Aside from "./Aside";
 import Banner from "./Components/Banner";
 import Review from "./Components/Review";
@@ -9,11 +11,11 @@ import WhatIsClass from "./Components/WhatIsClass";
 import Community from "./Components/Community";
 import HeadModal from "./Components/HeadModal";
 import { Hr } from "./Components/Utils";
-import { AiFillExclamationCircle } from "react-icons/ai";
-import TopHeader from "./Components/TopHeader";
-import { GetClassInfo } from "../../store/DetailReducer";
-import { useSelector, useDispatch } from "react-redux";
+import TopHeader from "./TopHeader";
+import { getClassInfo } from "../../store/DetailReducer";
 import { API } from "./Components/Utils";
+
+const SLICK_WIDTH = 850;
 
 const Detail = () => {
   const [isTopModal, setIsTopModal] = useState(false);
@@ -22,7 +24,7 @@ const Detail = () => {
   const [slickWidth, setSlickWidth] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { Detail, HeaderImages } = useSelector((store) => store.DetailReducer);
+  const { detail, headerImages } = useSelector((store) => store.DetailReducer);
   const dispatch = useDispatch();
   const focusTarget = useRef([]);
   const scrollEvent = () => {
@@ -32,7 +34,7 @@ const Detail = () => {
   useEffect(() => {
     window.addEventListener("scroll", scrollEvent);
     axios.get(API).then((res) => {
-      dispatch(GetClassInfo(res.data.detail));
+      dispatch(getClassInfo(res.data.detail));
     });
     return () => {
       window.removeEventListener("scroll", scrollEvent);
@@ -40,11 +42,9 @@ const Detail = () => {
   }, []);
 
   useEffect(() => {
-    if (scrollValue < focusTarget.current[1].offsetTop - 50) {
-      setSelectTab(1);
-    } else {
-      setSelectTab(2);
-    }
+    const isFirstTabActive =
+      scrollValue < focusTarget.current[1].offsetTop - 50;
+    setSelectTab(isFirstTabActive ? 1 : 2);
   }, [scrollValue]);
 
   const MoveEvent = (value) => {
@@ -55,32 +55,33 @@ const Detail = () => {
     });
   };
 
-  const HandleSlick = (waypoint) => {
+  const handleSlick = (waypoint) => {
     if (waypoint === "right") {
-      if (slickWidth > (HeaderImages.length - 1) * -850) {
-        setSlickWidth((prev) => prev - 850);
+      if (slickWidth > (headerImages.length - 1) * -SLICK_WIDTH) {
+        setSlickWidth((prev) => prev - SLICK_WIDTH);
         setCurrentPage((prev) => prev + 1);
-      } else if ((HeaderImages.length - 1) * -850) {
+      } else if ((headerImages.length - 1) * -SLICK_WIDTH) {
         setSlickWidth(0);
         setCurrentPage(1);
       }
     }
     if (waypoint === "left") {
       if (0 > slickWidth) {
-        setSlickWidth((prev) => prev + 850);
+        setSlickWidth((prev) => prev + SLICK_WIDTH);
         setCurrentPage((prev) => prev - 1);
       } else if (0 === slickWidth) {
-        setSlickWidth((HeaderImages.length - 1) * -850);
-        setCurrentPage(HeaderImages.length);
+        setSlickWidth((headerImages.length - 1) * -SLICK_WIDTH);
+        setCurrentPage(headerImages.length);
       }
     }
   };
 
   const handleModal = (number) => {
     setIsTopModal((prev) => !prev);
-    setSlickWidth((number - 1) * -850);
+    setSlickWidth((number - 1) * -SLICK_WIDTH);
     setCurrentPage(number);
   };
+
   return (
     <>
       <TopHeader handleModal={handleModal} />
@@ -106,7 +107,7 @@ const Detail = () => {
                 <div>
                   <img
                     src="https://cdn.class101.net/images/735748c0-9f44-40d7-a399-06f5204d92c6/autoxauto.png"
-                    alt=""
+                    alt="logo"
                   />
                 </div>
               </Banner>
@@ -123,7 +124,7 @@ const Detail = () => {
               <div className="images">
                 <img
                   src="https://cdn.class101.net/images/fa3e9d10-7fcb-431a-aa38-e0cbf9eebfee/1440xauto.webp"
-                  alt=""
+                  alt="logo"
                 />
               </div>
               <div
@@ -135,8 +136,8 @@ const Detail = () => {
                   <li>
                     <h5>클래스 분량</h5>
                     <span>
-                      {Detail.class_info?.chapter}개 챕터,
-                      {Detail.class_info?.sub_chapter}개 세부강의
+                      {detail.class_info?.chapter}개 챕터,
+                      {detail.class_info?.sub_chapter}개 세부강의
                     </span>
                   </li>
                   <li>
@@ -146,7 +147,7 @@ const Detail = () => {
                   <li>
                     <h5>자막 포함 여부</h5>
                     <span>
-                      {Detail.class_info?.is_subtitled ? "포함" : "미포함"}
+                      {detail.class_info?.is_subtitled ? "포함" : "미포함"}
                     </span>
                   </li>
                 </ul>
@@ -163,7 +164,7 @@ const Detail = () => {
         {isTopModal && (
           <HeadModal
             handleModal={handleModal}
-            HandleSlick={HandleSlick}
+            handleSlick={handleSlick}
             slickWidth={slickWidth}
             currentPage={currentPage}
           />
@@ -178,23 +179,28 @@ const Contents = styled.div`
   padding: 24px 0;
   max-width: 1176px;
   margin: 0 auto;
+
   .main {
     width: 69%;
     padding: 0 12px;
+
     .stickyTab {
       position: sticky;
       z-index: 10;
       transform: translateY(-1px);
       top: 0;
       background: white;
+
       ul {
         display: flex;
         margin: 0 10px;
         font-size: 14px;
-        li:nth-of-type(${(props) => props.selectTab}) {
+
+        li:nth-of-type(${({ selectTab }) => selectTab}) {
           position: relative;
           font-weight: bold;
           padding: 14px 0px 13px;
+
           &:before {
             position: absolute;
             bottom: -0px;
@@ -206,6 +212,7 @@ const Contents = styled.div`
             transform: translateX(-50%);
           }
         }
+
         li {
           cursor: pointer;
           color: #000;
@@ -214,11 +221,13 @@ const Contents = styled.div`
         }
       }
     }
+
     .images {
       img {
         width: 100%;
       }
     }
+
     .classInfo {
       h4 {
         padding: 25px 0;
@@ -242,14 +251,16 @@ const Contents = styled.div`
     }
   }
 
-  @media ${(props) => props.theme.tabletS} {
+  @media ${({ theme }) => theme.tabletS} {
     display: flex;
     flex-direction: column;
+
     .main {
       width: 100%;
+
       .classInfo {
         margin: 30px 0;
-        ${({ theme }) => theme.flexCenters}
+        ${({ theme }) => theme.flexCenterXY}
       }
     }
   }

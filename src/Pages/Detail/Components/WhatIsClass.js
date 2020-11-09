@@ -6,13 +6,13 @@ import { AiOutlineCopy, AiOutlineCalendar } from "react-icons/ai";
 
 const WhatIsClass = () => {
   const [whatClass, setWhatClass] = useState({});
+  const { sub_chapter, level, class_detail } = whatClass;
 
   useEffect(() => {
     axios.get(API).then((res) => {
       setWhatClass(res.data.detail.class_info);
     });
   }, []);
-  const { sub_chapter, level, class_detail } = whatClass;
   return (
     <WhatIsClassWrap>
       <div className="whatClass">
@@ -45,23 +45,29 @@ export default WhatIsClass;
 const WhatIsClassWrap = styled.div`
   .whatClass {
     margin-bottom: 30px;
+
     h3 {
       font-size: 25px;
       font-weight: 600;
       line-height: 30px;
+
       span {
         color: #2a8fb4;
       }
     }
   }
+
   .classinfora {
     display: flex;
+
     div {
       width: 50%;
+
       div {
         font-size: 20px;
         font-weight: 600;
       }
+
       p {
         font-size: 14px;
         padding: 10px 0;

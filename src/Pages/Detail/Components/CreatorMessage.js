@@ -3,9 +3,9 @@ import Styled from "styled-components";
 import axios from "axios";
 import SwiperCore, { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { API, ProfileImages } from "./Utils";
 import "swiper/swiper.scss";
 import "swiper/components/pagination/pagination.scss";
-import { API } from "./Utils";
 
 SwiperCore.use([Pagination]);
 
@@ -17,6 +17,7 @@ const CreatorMessage = () => {
       setNotice(res.data.notice);
     });
   }, []);
+
   return (
     <CreatorWrap>
       <Swiper
@@ -43,14 +44,7 @@ const MessageItem = ({ img, nickname, date, children }) => {
   return (
     <Wrap>
       <div>
-        <img
-          src={
-            img
-              ? img
-              : "https://ssl.pstatic.net/static/pwe/address/img_profile.png"
-          }
-          alt=""
-        />
+        <ProfileImages img={img} />
         <div>
           <h4>{nickname}</h4>
           <p>{date}</p>
@@ -64,13 +58,14 @@ const MessageItem = ({ img, nickname, date, children }) => {
 export default CreatorMessage;
 
 const CreatorWrap = Styled.div`
-position: relative;
+    position: relative;
     cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
     margin-bottom: 10px;
       overflow-x: hidden;
       box-shadow: rgba(41, 42, 43, 0.1) 0px 2px 5px, rgba(41, 42, 43, 0.06) 0px 0px 0.5px;
+    
     .buttons {
       position: absolute;
       z-index: 10;
@@ -84,24 +79,29 @@ const Wrap = Styled.div`
     padding: 16px;
     border-radius: ${({ theme }) => theme.radius.small};
     margin: 3px 4px 0px;
+
     > div {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
+
       img {
         border-radius: 50%;
         width: 40px;
         height: 40px;
       }
+
       > div {
         display: flex;
         padding-left: 10px;
         flex-direction: column;
         justify-content: center;
+
         h4 {
           font-size: 11px;
           font-weight: 600;
         }
+
         p {
           font-size: 10px;
           color: gray;
@@ -109,6 +109,7 @@ const Wrap = Styled.div`
         }
       }
     }
+
     span {
       font-size: 14px;
       line-height: 18px;
