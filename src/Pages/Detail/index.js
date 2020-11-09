@@ -166,7 +166,7 @@ const Detail = () => {
             <Community focusTarget={focusTarget} />
           </div>
         </div>
-        <Aside />
+        <Aside classId={classId} />
         {isTopModal && (
           <HeadModal
             handleModal={handleModal}
@@ -185,28 +185,23 @@ const Contents = styled.div`
   padding: 24px 0;
   max-width: 1176px;
   margin: 0 auto;
-
   .main {
     width: 69%;
     padding: 0 12px;
-
     .stickyTab {
       position: sticky;
       z-index: 10;
       transform: translateY(-1px);
       top: 0;
       background: white;
-
       ul {
         display: flex;
         margin: 0 10px;
         font-size: 14px;
-
         li:nth-of-type(${({ selectTab }) => selectTab}) {
           position: relative;
           font-weight: bold;
           padding: 14px 0px 13px;
-
           &:before {
             position: absolute;
             bottom: -0px;
@@ -218,7 +213,6 @@ const Contents = styled.div`
             transform: translateX(-50%);
           }
         }
-
         li {
           cursor: pointer;
           color: #000;
@@ -227,13 +221,11 @@ const Contents = styled.div`
         }
       }
     }
-
     .images {
       img {
         width: 100%;
       }
     }
-
     .classInfo {
       h4 {
         padding: 25px 0;
@@ -256,14 +248,11 @@ const Contents = styled.div`
       }
     }
   }
-
   @media ${({ theme }) => theme.tabletS} {
     display: flex;
     flex-direction: column;
-
     .main {
       width: 100%;
-
       .classInfo {
         margin: 30px 0;
         ${({ theme }) => theme.flexCenterXY}
