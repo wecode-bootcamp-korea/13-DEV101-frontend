@@ -40,10 +40,11 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((res) => {
-            localStorage.setItem("Kakao_token", res.access_token);
+            console.log(res);
+            localStorage.setItem("Kakao_token", res.Authorization);
             if (res.access_token) {
               alert(res.access_token);
-              history.push("/");
+              history.push("/main");
             }
           });
       },

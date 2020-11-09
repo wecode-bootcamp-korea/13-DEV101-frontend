@@ -72,7 +72,7 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
               placeholder="********"
               ref={register({
                 required: "❗️비밀번호를 입력하세요",
-                minLength: 8,
+                minLength: 7,
               })}
             />
             {errors.password?.type === "minLength" && <span>❗️8글자 이상 !!!</span>}
