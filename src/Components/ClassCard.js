@@ -38,6 +38,7 @@ const ClassCard = ({
   discount,
   coupon,
   updated_at,
+  product_id,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [pricePerMonth, setPricePerMonth] = useState(0);
@@ -51,9 +52,9 @@ const ClassCard = ({
 
   return (
     <ClassCardComponent cardWidth={cardWidth}>
-      <Link to="/">
+      <Link to={`/detail/${product_id}`}>
         <HoverImgBox>
-          {coupon && <span>{coupon}</span>}
+          {coupon && <span style={{ display: coupon === "0" ? "none" : "block" }}>{coupon}</span>}
           <ImgWithProps
             src={
               image_url ||
