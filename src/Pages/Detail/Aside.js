@@ -54,7 +54,7 @@ const Aside = () => {
   }, [detailAside]);
 
   const classRequest = (id) => {
-    history.push(`/detail/${productId}/payment`);
+    history.push(`/detail/${productId}/package`);
   };
 
   const heartButtonClick = () => {
