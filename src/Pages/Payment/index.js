@@ -10,6 +10,8 @@ import { Hr, ORDER_API } from "../../utils";
 
 const Payment = () => {
   const dispatch = useDispatch();
+  const [method, setMethod] = useState("card");
+  const [isSmsAuth, setIsSmsAuth] = useState(false);
   const { id: classId } = useParams();
   const {
     creator,
@@ -20,18 +22,60 @@ const Payment = () => {
     discount,
     total,
   } = useSelector((state) => state.PaymentReducer.orderInfo);
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(0);
+  const [smsCheck, setSmsCheck] = useState(0);
   console.log(classId);
   const history = useHistory();
-  const [method, setMethod] = useState("card");
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+
+  const handlePhone = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const handleCheck = (e) => {
+    setSmsCheck(e.target.value);
+  };
 
   useEffect(() => {
     axios.get(`${ORDER_API}${classId}`).then((res) => {
       dispatch(GetOrderInfo(res.data));
+      setName(username);
+      setPhoneNumber(phone_number);
     });
   }, []);
 
   const moveCardPage = () => {
     history.push(`/detail/${classId}/cardpayment`);
+  };
+
+  const smsSubmit = async () => {
+    try {
+      const result = await axios.post("http://10.58.1.45:8000/order/smsauth", {
+        phone_number: phoneNumber,
+      });
+      console.log(result);
+      setIsSmsAuth(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const smsChecked = async () => {
+    try {
+      await axios.post("http://10.58.1.45:8000/order/smsauthcheck", {
+        phone_number: phoneNumber,
+        auth_number: smsCheck,
+      });
+      alert("정상적으로 인증되셨습니다.");
+      setIsSmsAuth(false);
+    } catch (err) {
+      alert("인증번호가 틀렸습니다.");
+      console.log(err);
+    }
   };
 
   return (
@@ -58,15 +102,28 @@ const Payment = () => {
             <div className="callInfo">
               <div>
                 <span> 받으시는 분 </span>
-                <input value={username} type="text" />
+                <input value={name} onChange={handleName} type="text" />
               </div>
               <div>
                 <span> 휴대폰 정보 </span>
-                <input value={phone_number} type="text" />
+                <input value={phoneNumber} onChange={handlePhone} type="text" />
               </div>
-              <div className="accredit">
+              <div onClick={smsSubmit} className="smsAuth">
                 <button>인증번호 전송</button>
               </div>
+              {isSmsAuth && (
+                <div>
+                  <input
+                    value={smsCheck}
+                    onChange={handleCheck}
+                    placeholder="인증번호를 입력해주세요"
+                    type="text"
+                  />
+                  <button onClick={smsChecked} className="smsAuthCheck">
+                    인증번호 확인
+                  </button>
+                </div>
+              )}
             </div>
           </ContactInfo>
           <Hr margin="24px 0" />
@@ -202,12 +259,16 @@ const ContactInfo = Styled.div`
         display: flex;
         flex-direction: column;
         }
-        .accredit {
+        .smsAuth, {
           button {
             background: gray;
             color: white;
           cursor: pointer;
           }
+        }
+        .smsAuthCheck {
+          background: gray;
+          cursor: pointer;
         }
       }
       div {
