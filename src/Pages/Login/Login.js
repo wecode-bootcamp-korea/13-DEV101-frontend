@@ -24,7 +24,7 @@ const Login = () => {
     setIsInputPw(e.target.value);
   };
 
-  const KakaoAPI = "http://10.58.7.131:8000/user/kakao/login";
+  const KakaoAPI = "http://10.58.5.35:8000/user/kakao/login";
   const { Kakao } = window;
   const history = useHistory();
 
