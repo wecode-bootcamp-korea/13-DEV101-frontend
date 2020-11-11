@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 import { AiFillWarning } from "react-icons/ai";
 import CreaditCard from "./Components/CreaditCard";
+import Popup from "./Components/Popup";
 import { useSelector } from "react-redux";
 import { range } from "../../utils";
 
@@ -20,6 +21,8 @@ const CardPayment = () => {
   const [cardPasswordValidation, setCardPasswordValidation] = useState(true);
   const [cardMonthYearValidation, setCardMonthYearValidation] = useState(true);
   const [cardBirthdayValidation, setBirthdayValidation] = useState(true);
+  const [isAllValidation, setIsAllValidation] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   const { total } = useSelector((state) => state.PaymentReducer.orderInfo);
 
@@ -86,6 +89,19 @@ const CardPayment = () => {
     } else {
       setBirthdayValidation(false);
     }
+    if (
+      cardNumberValidation &&
+      cardPasswordValidation &&
+      cardMonthYearValidation &&
+      cardBirthdayValidation
+    ) {
+      setPaymentSuccess(true);
+    }
+    setIsAllValidation(true);
+    setTimeout(() => {
+      setIsAllValidation(false);
+      setPaymentSuccess(false);
+    }, 2000);
   };
   return (
     <CardPaymentWrap>
@@ -234,6 +250,8 @@ const CardPayment = () => {
           </form>
         </CardInfo>
       </div>
+      {paymentSuccess && <Popup type="success" />}
+      {isAllValidation && !paymentSuccess && <Popup type="failed" />}
     </CardPaymentWrap>
   );
 };
@@ -241,6 +259,7 @@ const CardPayment = () => {
 export default CardPayment;
 
 const CardPaymentWrap = Styled.div`
+position: relative;
 display: flex;
 justify-content: center;
 background: ${({ theme }) => theme.colors.softGray};

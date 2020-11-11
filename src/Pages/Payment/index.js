@@ -141,15 +141,12 @@ const Payment = () => {
                 <h5>최종 가격</h5>
                 <span>{total}원</span>
               </span>
-              <Button color="#ff922b" bgcolor="#fff9f2">
-                쿠폰 적용하기
-              </Button>
             </div>
           </PaymentAmount>
           <Hr margin="24px 0" />
           <PaymentMethod>
             <button onClick={() => setMethod("Npay")}>
-              <span>Npay</span>
+              <span>Npay ( 추가 예정 )</span>
               {method === "Npay" && <AiOutlineCheck size={20} />}
             </button>
             <button onClick={() => setMethod("card")}>
