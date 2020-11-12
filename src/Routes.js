@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import Login from "./Pages/Login/Login";
 import LoginAnother from "./Pages/Login/LoginAnother";
@@ -12,6 +12,7 @@ import Footer from "./Components/Footer";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
+import Creators from "./Pages/Creators";
 import Nav from "./Components/Nav/Nav";
 import PackageSelector from "./Pages/PackageSelector";
 import Payment from "./Pages/Payment";
@@ -29,6 +30,7 @@ const Routes = () => {
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/LoginAnother" component={LoginAnother} />
             <Route exact path="/myPage" component={MyPage} />
+            <Route exact path="/creators" component={Creators} />
             <Route exact path="/searchPage/" component={SearchPage} />
             <Route exact path="/searchPage/:searchVal" component={SearchPage} />
             <Route exact path="/detail/:id/package" component={PackageSelector} />

@@ -4,7 +4,6 @@ import { BsSearch } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
-import axios from "axios";
 
 const Nav = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -56,12 +55,6 @@ const Nav = () => {
         setMockData(res.myPageMock.my_info);
       });
   }, []);
-
-  // useEffect(() => {
-  //   axios.post("http://localhost:3000/Data/myPageMockData.json").then((res) => {
-  //     setMockData(res.myPageMock.my_info);
-  //   });
-  // }, []);
 
   return (
     <NavBar isNavActive={isNavActive}>
