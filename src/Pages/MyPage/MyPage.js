@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MyPageSlider from "./MyPageComponent/MyPageSlider";
-import LeftMenuCard from "./MyPageComponent/LeftMenuCard";
 import { RiCoupon2Line } from "react-icons/ri";
 import { AiOutlineHeart, AiFillInfoCircle } from "react-icons/ai";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { GoPencil } from "react-icons/go";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import MyPageSlider from "./MyPageComponent/MyPageSlider";
+import LeftMenuCard from "./MyPageComponent/LeftMenuCard";
+import ClassMadeCard from "./MyPageComponent/ClassMadeCard";
+import { HHAPI } from "../../config";
 
 const MyPage = () => {
   const [myPageList, setMyPageList] = useState([]);
@@ -17,10 +17,17 @@ const MyPage = () => {
     fetch("http://localhost:3000/Data/myPageList.json")
       .then((res) => res.json())
       .then((result) => setMyPageList(result.myPageList));
-    fetch("http://localhost:3000/Data/myPageMockData.json")
+    fetch(`${HHAPI}/user/me`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("TOKEN"),
+      },
+    })
       .then((res) => res.json())
-      .then((result) => setMockData(result.myPageMock));
+      .then((res) => setMockData(res.mypage[0]));
   }, []);
+
+  const [isLiked, setIsLiked] = useState(false);
 
   return (
     <MyPageContainer>
@@ -59,7 +66,7 @@ const MyPage = () => {
               <div>
                 <HiOutlineShoppingBag size={22} />
                 <p>
-                  내 클래스 <span>{mockData.my_info?.class_num}</span>개
+                  내 클래스 <span>{mockData.my_info?.order_count}</span>개
                 </p>
               </div>
             </div>
@@ -88,29 +95,36 @@ const MyPage = () => {
           <LeftMenuCard menuTitle="메뉴" menuList={myPageList?.menuList} />
         </LeftContainer>
         <RightContainer>
-          <MyPageSlider cardDataList={mockData?.seen_class} title="내가 본 클래스" />
-          <MyPageSlider cardDataList={mockData?.liked_class} title="내가 찜한 클래스" />
+          {!mockData.seen_class?.length ? (
+            <>
+              <ParentTitle>내가 본 클래스</ParentTitle>
+              <ClassTxt>아직 내가 본 클래스가 없습니다.</ClassTxt>
+            </>
+          ) : (
+            <MyPageSlider cardDataList={mockData?.seen_class} title="내가 본 클래스" />
+          )}
+          {!mockData.liked_class?.length ? (
+            <>
+              <ParentTitle marginTop={64}>내가 찜한 클래스</ParentTitle>
+              <ClassTxt>아직 내가 찜한 클래스가 없습니다.</ClassTxt>
+            </>
+          ) : (
+            <MyPageSlider
+              cardDataList={mockData?.liked_class}
+              title="내가 찜한 클래스"
+              likedList={true}
+            />
+          )}
+
           <RightContentBottom>
             <Title>
               <h2>내가 개설한 클래스</h2>
             </Title>
-            <div>
-              <section>
-                <div className="imgWrapper">
-                  <img src={mockData.class_made?.[0].class_image} alt="class" />
-                </div>
-                <div>
-                  <div>
-                    <h2>{mockData.class_made?.[0].title}</h2>
-                    <p>
-                      {mockData.class_made?.[0].category} · {mockData.class_made?.[0].mentor}
-                    </p>
-                    <p>{mockData.class_made?.[0].description}</p>
-                  </div>
-                  <button>클래스로 이동하기</button>
-                </div>
-              </section>
-            </div>
+            {!mockData.class_made?.length ? (
+              <ClassTxt>아직 내가 개설한 클래스가 없습니다.</ClassTxt>
+            ) : (
+              <ClassMadeCard dataList={mockData.class_made} />
+            )}
           </RightContentBottom>
         </RightContainer>
       </Wrapper>
@@ -177,6 +191,7 @@ const ProfileCard = styled.section`
           object-fit: cover;
         }
       }
+
       .profileIconWrapper {
         width: 20px;
         height: 20px;
@@ -333,78 +348,6 @@ const RightContentBottom = styled.section`
       margin-bottom: 6px;
     }
   }
-  div {
-    section {
-      margin: 0 auto;
-      width: 100%;
-      height: 226.5px;
-      padding: 24px;
-      box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 1px, rgba(0, 0, 0, 0.03) 0px 2px 5px,
-        rgba(0, 0, 0, 0.04) 0px 3px 7px, rgba(0, 0, 0, 0.04) 0px 7px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-
-      .imgWrapper {
-        width: 250px;
-        height: 180px;
-        background-color: #eeeeee;
-        border-radius: 1px;
-        overflow: hidden;
-
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      div:nth-child(2) {
-        width: 450px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        div {
-          h2 {
-            font-size: 18px;
-            font-weight: 500;
-            color: rgb(27, 28, 29);
-            line-height: 24px;
-            letter-spacing: -0.45px;
-          }
-
-          p:nth-child(2) {
-            font-size: 12px;
-            color: #808080;
-          }
-          p:nth-child(3) {
-            font-size: 14px;
-            color: #808080;
-            margin-top: 12px;
-          }
-        }
-
-        button {
-          width: 100%;
-          height: 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border-radius: 3px;
-          color: rgb(237, 239, 240);
-          background-color: rgb(62, 64, 66);
-          font-weight: 500;
-          font-size: 14px;
-          letter-spacing: -0.2px;
-          padding: 0px 16px;
-          height: 40px;
-          transition: background-color 0.1s ease 0s;
-          text-decoration-line: none;
-        }
-      }
-    }
-  }
 `;
 
 const Title = styled.div`
@@ -419,6 +362,24 @@ const Title = styled.div`
   letter-spacing: -0.45px;
 `;
 
+const ClassTxt = styled.p`
+  font-size: 14px;
+  color: rgb(133, 138, 141);
+`;
+
 const RightContainer = styled.section`
   width: 776px;
+`;
+
+const ParentTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  color: #1b1c1d;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 24px;
+  letter-spacing: -0.45px;
+  margin-top: ${(props) => props.marginTop || 0}px;
 `;

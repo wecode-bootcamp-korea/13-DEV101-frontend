@@ -4,7 +4,6 @@ import { BsSearch } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
-import axios from "axios";
 
 const Nav = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -26,6 +25,8 @@ const Nav = () => {
     history.push(`searchPage?query=${inputValue}`);
   };
 
+  console.log(inputValue);
+
   const logout = () => {
     setIsLogin(false);
     window.localStorage.removeItem("token");
@@ -39,25 +40,18 @@ const Nav = () => {
   const kakaoToken = localStorage.getItem("Kakao_token");
 
   const Token = localStorage.getItem("Token");
-  console.log(localStorage);
 
   const isVisibleUserBox = () => {
     setIsClick(!isClick);
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/Data/myPageMockData.json")
+    fetch("http://10.58.7.92:8000/user/me")
       .then((res) => res.json())
       .then((res) => {
         setMockData(res.myPageMock.my_info);
       });
   }, []);
-
-  // useEffect(() => {
-  //   axios.post("http://localhost:3000/Data/myPageMockData.json").then((res) => {
-  //     setMockData(res.myPageMock.my_info);
-  //   });
-  // }, []);
 
   return (
     <NavBar isNavActive={isNavActive}>

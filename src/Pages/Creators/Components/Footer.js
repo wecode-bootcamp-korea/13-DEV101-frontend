@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { CREATOR_API } from "../../utils";
 import { useSelector } from "react-redux";
 
 const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }) => {
+  const history = useHistory();
+  const [productId, setProductId] = useState(0);
   const [newBrand, setNewBrand] = useState("크리에이티브");
   const { brand, creatorName, category, subCategory, level } = useSelector(
     (state) => state.CreatorsReducer.infomation,
@@ -45,7 +48,15 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("category_detail", subCategory);
       formData.append("level", level);
       try {
-        axios.post(`${CREATOR_API}135/basicinfo`, formData);
+        axios
+          .post(`${CREATOR_API}basicinfo`, formData, {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          })
+          .then((res) => {
+            res.data.product_id && setProductId(res.data.product_id);
+          });
       } catch (err) {}
     } else if (currentPage === "title") {
       handleCurrentPage("info");
@@ -55,12 +66,15 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("file", thumbnailImg);
 
       try {
-        axios.post(`${CREATOR_API}135/covertitle/118`, formData, {
+        axios.post(`${CREATOR_API}covertitle/${productId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token"),
           },
         });
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     } else if (currentPage === "info") {
       const formData = new FormData();
       formData.append("theme_desc", info.one.desc);
@@ -70,15 +84,17 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("file", info.one.src);
       formData.append("file", info.one.src);
       try {
-        axios.post(`${CREATOR_API}135/introduction/118`, formData, {
+        axios.post(`${CREATOR_API}introduction/${productId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token"),
           },
         });
       } catch (err) {
         console.log(err);
       }
-      alert("저장하시겠습니까?");
+      alert("클래스 생성에 성공하셨습니다.");
+      history.push("/");
     }
   };
   return (

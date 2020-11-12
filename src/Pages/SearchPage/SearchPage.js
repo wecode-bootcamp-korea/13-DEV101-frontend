@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsArrowRightShort } from "react-icons/bs";
 import ClassCard from "../../Components/ClassCard";
 import MordalPortal from "./SearchPageComponent/MordalPortal";
 import FilterBtnModal from "./SearchPageComponent/FilterBtnModal";
 import SearchBanner from "./SearchPageComponent/SearchBanner";
-import InfiniteScroll from "../../Components/InfiniteScroll";
 import { JHAPI } from "../../config";
 
 const SearchPage = () => {
@@ -17,9 +15,6 @@ const SearchPage = () => {
   const [category, setCategory] = useState("카테고리");
   const [sortBtnChecked, setSortBtnChecked] = useState("");
   const [sortQuery, setSortQuery] = useState("updated");
-  const [infiniteData, setInfiniteData] = useState([]);
-  const [newFetchedData, setNewFetchedData] = useState([]);
-  let fetchCount = 0;
 
   const sortQueryFunction = (value) => {
     setSortBtnChecked(value);
@@ -44,21 +39,17 @@ const SearchPage = () => {
     setModalVisible(!modalVisible);
   };
 
-  useEffect(() => {
-    intersection();
-  }, []);
-
   const searchQuery = window.location.search;
 
   useEffect(() => {
     fetch(
-      `${JHAPI}/search${searchQuery ? `${searchQuery}?` : "?"}${
+      `${JHAPI}/search${searchQuery ? `${searchQuery}` : "?"}${
         category !== "카테고리" ? `&category=${category}` : ""
-      }${sortQuery ? `&sort=${sortQuery}` : ""}&offset=0&limit=7`,
+      }${sortQuery ? `&sort=${sortQuery}` : ""}&offset=0&limit=200`,
     )
       .then((res) => res.json())
       .then((result) => setSearchResultCard(result.data));
-  }, [category, sortQuery]);
+  }, [category, sortQuery, searchQuery]);
 
   useEffect(() => {
     modalVisible && (document.body.style.overflow = "hidden");
@@ -67,44 +58,6 @@ const SearchPage = () => {
 
   const getBtnVal = (checkedVal) => {
     setCategory(checkedVal);
-  };
-
-  useEffect(() => {
-    const mergedData = [...infiniteData, ...newFetchedData];
-    setInfiniteData(mergedData);
-  }, [newFetchedData]);
-
-  const fetchData = () => {
-    fetchCount++;
-    axios
-      .get(
-        `${JHAPI}/search${searchQuery ? searchQuery : "?"}${
-          category !== "카테고리" ? `&category=${category}` : ""
-        }${sortQuery ? `&sort=${sortQuery}` : ""}&offset=${16 * fetchCount + 7}&limit=16`,
-      )
-      .then((res) => {
-        setNewFetchedData(res.data.data);
-      });
-  };
-
-  const intersection = () => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 1,
-    };
-    let callback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (entry.intersectionRatio >= 0.75) {
-            fetchData();
-          }
-        }
-      });
-    };
-    let target = document.querySelector(".observer");
-    let observer = new IntersectionObserver(callback, options);
-    observer.observe(target);
   };
 
   return (
@@ -121,7 +74,7 @@ const SearchPage = () => {
         </button>
       </FilterContainer>
       <ClassResultContainer>
-        {searchResultCard.slice(0, 7).map((searchData, idx) => {
+        {searchResultCard?.slice(0, 7).map((searchData, idx) => {
           return (
             <div>
               <ClassCard key={idx} {...searchData} cardWidth={276} />
@@ -138,15 +91,14 @@ const SearchPage = () => {
         <BannerContainer>
           <SearchBanner />
         </BannerContainer>
-        {searchResultCard.slice(7).map((searchData, idx) => {
+        {searchResultCard?.slice(7).map((searchData, idx) => {
           return (
             <div>
-              <ClassCard {...searchData} cardWidth={276} />
+              <ClassCard key={idx} {...searchData} cardWidth={276} />
             </div>
           );
         })}
       </ClassResultContainer>
-      <InfiniteScroll dataList={infiniteData} />
       <div className="observer"></div>
       <MordalPortal>
         <FilterBtnModal
