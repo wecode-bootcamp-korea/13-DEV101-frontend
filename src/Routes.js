@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import { Provider } from "react-redux";
+import React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
