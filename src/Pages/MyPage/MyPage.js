@@ -7,27 +7,30 @@ import { GoPencil } from "react-icons/go";
 import MyPageSlider from "./MyPageComponent/MyPageSlider";
 import LeftMenuCard from "./MyPageComponent/LeftMenuCard";
 import ClassMadeCard from "./MyPageComponent/ClassMadeCard";
-import { HHAPI } from "../../config";
+import { JHAPI } from "../../config";
 
 const MyPage = () => {
   const [myPageList, setMyPageList] = useState([]);
-  const [mockData, setMockData] = useState([]);
+  const [mockData, setMockData] = useState([{}]);
+  const [likedClass, setLikedClass] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:3000/Data/myPageList.json")
       .then((res) => res.json())
       .then((result) => setMyPageList(result.myPageList));
-    fetch(`${HHAPI}/user/me`, {
+
+    fetch(`${JHAPI}/user/me`, {
       method: "GET",
       headers: {
         Authorization: localStorage.getItem("TOKEN"),
       },
     })
       .then((res) => res.json())
-      .then((res) => setMockData(res.mypage[0]));
+      .then((res) => {
+        setMockData(res.mypage?.[0]);
+        setLikedClass(res.mypage?.[0].liked_class);
+      });
   }, []);
-
-  const [isLiked, setIsLiked] = useState(false);
 
   return (
     <MyPageContainer>
@@ -37,7 +40,14 @@ const MyPage = () => {
             <div className="profileTop">
               <div className="imagesWrapper">
                 <div className="profileImgWrapper">
-                  <img src={mockData.my_info?.profile_image} alt="profile" />
+                  <img
+                    src={
+                      mockData.my_info?.profile_image
+                        ? mockData.my_info?.profile_image
+                        : "https://www.pngfind.com/pngs/m/378-3780189_member-icon-png-transparent-png.png"
+                    }
+                    alt="profile"
+                  />
                 </div>
                 <div className="profileIconWrapper">
                   <GoPencil size={10} />
@@ -60,7 +70,7 @@ const MyPage = () => {
               <div>
                 <AiOutlineHeart size={22} />
                 <p>
-                  찜 <span>{mockData.my_info?.liked_num}</span>개
+                  찜 <span>{likedClass?.length}</span>개
                 </p>
               </div>
               <div>

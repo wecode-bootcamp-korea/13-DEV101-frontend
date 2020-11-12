@@ -75,9 +75,9 @@ const Main = ({ match }) => {
           <SubBanner />
           <h3>최근 업데이트 클래스</h3>
           <InfiniteScroll dataList={updated} />
+          <div className="observer"></div>
         </div>
       </PageWrapper>
-      <div className="observer"></div>
     </MainSection>
   );
 };
@@ -86,7 +86,7 @@ const MainSection = styled.section`
   overflow: hidden;
   .observer {
     position: absolute;
-    bottom: 300px;
+    bottom: 500px;
   }
 `;
 

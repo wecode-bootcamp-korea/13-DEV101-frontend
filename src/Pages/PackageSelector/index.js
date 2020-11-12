@@ -17,7 +17,7 @@ const PackageSelector = () => {
     axios
       .get(`${API}${classId}/packages`, {
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: localStorage.getItem("TOKEN"),
         },
       })
       .then((res) => {

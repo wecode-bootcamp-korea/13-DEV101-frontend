@@ -3,21 +3,25 @@ import axios from "axios";
 import SliderComponent from "../../Components/SliderComponent";
 import MainSlider from "./components/MainSlider";
 import InfiniteScroll from "../../Components/InfiniteScroll";
+import IsPlannedModal from "../../Components/IsPlannedModal";
 import styled from "styled-components";
 import SubBanner from "./components/SubBanner";
+import { JHAPI } from "../../config";
 
 const Main = () => {
   const [top10, setTop10] = useState([]);
   const [planned, setPlanned] = useState([]);
   const [updated, setUpdated] = useState([]);
   const [fetchedData, setFetchedData] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalProductId, setModalProductId] = useState("");
   let fetchCount = 0;
 
   useEffect(() => {
     axios
-      .get(`http://10.58.1.45:8000/products?offset=0&limit=16`, {
+      .get(`${JHAPI}/products?offset=0&limit=16`, {
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: localStorage.getItem("TOKEN"),
         },
       })
       .then(({ data }) => {
@@ -25,6 +29,7 @@ const Main = () => {
         setPlanned(data.planned_data);
         setUpdated(data.updated_data);
       });
+
     intersection();
   }, []);
 
@@ -33,12 +38,12 @@ const Main = () => {
     setUpdated(mergedData);
   }, [fetchedData]);
 
-  const fetchData = async () => {
+  const fetchData = () => {
     fetchCount++;
     axios
-      .get(`http://10.58.1.45:8000/products?offset=${16 * fetchCount}&limit=16`, {
+      .get(`${JHAPI}/products?offset=${16 * fetchCount}&limit=16`, {
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: localStorage.getItem("TOKEN"),
         },
       })
       .then((res) => {
@@ -66,22 +71,36 @@ const Main = () => {
     observer.observe(target);
   };
 
+  const modalHandler = (itemId) => {
+    setModalProductId(itemId);
+    setModalVisible(!modalVisible);
+  };
+
   return (
-    <MainSection>
-      <MainSlider />
-      <PageWrapper>
-        <div>
-          <h3>지금, 인기 TOP 10</h3>
-          <SliderComponent dataList={top10} />
-          <h3>오픈 예정 클래스</h3>
-          <SliderComponent dataList={planned} />
-          <SubBanner />
-          <h3>최근 업데이트 클래스</h3>
-          <InfiniteScroll dataList={updated} />
-          <div className="observer"></div>
-        </div>
-      </PageWrapper>
-    </MainSection>
+    <>
+      <MainSection>
+        <MainSlider />
+        <PageWrapper>
+          <div>
+            <h3>지금, 인기 TOP 10</h3>
+            <SliderComponent dataList={top10} />
+            <h3>오픈 예정 클래스</h3>
+            <SliderComponent dataList={planned} modalHandler={modalHandler} />
+            <SubBanner />
+            <h3>최근 업데이트 클래스</h3>
+            <InfiniteScroll dataList={updated} />
+            <div className="observer"></div>
+          </div>
+        </PageWrapper>
+      </MainSection>
+      {modalVisible && (
+        <IsPlannedModal
+          modalVisible={modalVisible}
+          id={modalProductId}
+          modalHandler={modalHandler}
+        />
+      )}
+    </>
   );
 };
 

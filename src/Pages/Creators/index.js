@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Nav from "./Components/Nav";
 import Aside from "./Components/Aside";
 import Footer from "./Components/Footer";
@@ -20,6 +21,7 @@ const Creators = () => {
     two: {},
     three: {},
   });
+  const history = useHistory();
 
   const handleExit = () => {
     setIsExit((prev) => !prev);
@@ -57,6 +59,11 @@ const Creators = () => {
     }
   };
 
+  const plzLeaveMe = () => {
+    alert("안돼요 못나가요");
+    history.push("/");
+  };
+
   return (
     <Wrap>
       <Nav handleExit={handleExit} />
@@ -85,7 +92,7 @@ const Creators = () => {
               만나세요! 조금만 더 힘내봐요 우리!
             </span>
             <Buttons>
-              <button onClick={() => alert("안돼요 못나가요")}>싫어요 나갈래요</button>
+              <button onClick={plzLeaveMe}>싫어요 나갈래요</button>
               <button onClick={handleExit}>계속 작성할래요</button>
             </Buttons>
             <div className="exitButton" onClick={handleExit}>

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 import { FaRegHeart, FaHeart, FaThumbsUp, FaFireAlt } from "react-icons/fa";
 import styled from "styled-components";
+import { JHAPI } from "../config";
 
 const timePassed = (time) => {
   const BackDate = time.split(".").slice(0, 1)[0];
@@ -39,9 +41,55 @@ const ClassCard = ({
   coupon,
   updated_at,
   product_id,
+  modalHandler,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [pricePerMonth, setPricePerMonth] = useState(0);
+  const history = useHistory();
+
+  const likeBtnHandler = () => {
+    axios
+      .post(
+        `${JHAPI}/product/${product_id}/like`,
+        {},
+        {
+          headers: {
+            Authorization: localStorage.getItem("TOKEN"),
+            // Authorization:
+            //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTd9.6B6hmXf3Wu4LMlAU3aIc7XUiFDmaHli7V4a6YwKpPmI",
+          },
+        },
+      )
+      .then((res) => alert("찜 등록이 완료되었습니다."))
+      .catch((err) => {
+        if (err.message.includes("400")) {
+          alert("로그인을 먼저 해주세요.");
+          history.push("/Login");
+        }
+      });
+    setIsLiked(!isLiked);
+  };
+
+  const cheerBtnHandler = (e) => {
+    e.stopPropagation();
+    axios
+      .post(
+        `${JHAPI}/product/${product_id}/cheer`,
+        {},
+        {
+          headers: {
+            Authorization: localStorage.getItem("TOKEN"),
+          },
+        },
+      )
+      .then((res) => alert("응원하기가 완료되었습니다."))
+      .catch((err) => {
+        if (err.message.includes("400")) {
+          alert("로그인을 먼저 해주세요.");
+          history.push("/Login");
+        }
+      });
+  };
 
   useEffect(() => {
     if (price && discount) {
@@ -52,7 +100,14 @@ const ClassCard = ({
 
   return (
     <ClassCardComponent cardWidth={cardWidth}>
-      <Link to={`/detail/${product_id}`}>
+      <LikeBtn className="likeBtn" onClick={likeBtnHandler}>
+        {isLiked ? <FaHeart fill="#f33340" /> : <FaRegHeart fill="#f8f8f8" />}
+      </LikeBtn>
+      <div
+        onClick={() =>
+          is_open === false ? modalHandler(product_id) : history.push(`/detail/${product_id}`)
+        }
+      >
         <HoverImgBox>
           {coupon && <span style={{ display: coupon === "0" ? "none" : "block" }}>{coupon}</span>}
           <ImgWithProps
@@ -62,11 +117,8 @@ const ClassCard = ({
             }
             alt="ClassThumbnails"
           />
-          <LikeBtn onClick={() => setIsLiked(!isLiked)}>
-            {isLiked ? <FaHeart fill="#f33340" /> : <FaRegHeart fill="#f8f8f8" />}
-          </LikeBtn>
         </HoverImgBox>
-        <TextDiv>
+        <TextDiv className="description">
           <Bold>
             {sub_category}, {mentor}
           </Bold>
@@ -82,19 +134,19 @@ const ClassCard = ({
             </span>
             {is_open !== false && (
               <span>
-                <FaThumbsUp /> {thumbs_up}%
+                <FaThumbsUp /> {Math.floor(thumbs_up * 100)}%
               </span>
             )}
           </Rates>
         </TextDiv>
         <TextDiv className="noBorder">
           {is_open === false ? (
-            <Button>응원하기</Button>
+            <Button onClick={(e) => cheerBtnHandler(e)}>응원하기</Button>
           ) : price ? (
             <>
               <p>
                 <CentereLinedSpan>{Number(price).toLocaleString()}원</CentereLinedSpan>
-                <span className="red">{discount * 100}%</span>
+                <span className="red">{Math.floor(discount * 100)}%</span>
               </p>
               <p>
                 <Bold className="cost">월 {Math.floor(pricePerMonth).toLocaleString()}원</Bold>
@@ -107,13 +159,15 @@ const ClassCard = ({
             </span>
           )}
         </TextDiv>
-      </Link>
+      </div>
     </ClassCardComponent>
   );
 };
 
 const ClassCardComponent = styled.div`
-  width: ${({ cardWidth }) => cardWidth || 267}px;
+  width: 267px;
+  position: relative;
+  cursor: pointer;
 `;
 
 const HoverImgBox = styled.div`
@@ -152,6 +206,10 @@ const TextDiv = styled.div`
   padding: 5px 0;
   margin-bottom: 5px;
   border-bottom: 1px solid #f2f4f5;
+
+  &.description {
+    height: 110px;
+  }
 
   &.noBorder {
     border-bottom: none;
@@ -212,7 +270,10 @@ const LikeBtn = styled.button`
   top: 10px;
   right: 10px;
   font-size: 24px;
-  z-index: 22;
+  z-index: 333;
+  svg {
+    pointer-events: none;
+  }
 `;
 
 const CentereLinedSpan = styled.span`

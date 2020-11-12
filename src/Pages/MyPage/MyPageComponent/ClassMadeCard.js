@@ -26,7 +26,7 @@ const slickSettings = {
 };
 
 const ClassMadeCard = ({ dataList }) => {
-  console.log(dataList);
+  console.log("dataListM{", dataList);
   return (
     <StyledSlider
       {...slickSettings}

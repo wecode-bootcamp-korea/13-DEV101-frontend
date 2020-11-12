@@ -47,7 +47,7 @@ export default MainBanner;
 
 const MainBannerWrapper = styled.div`
   height: 350px;
-  margin: 90px 0 60px;
+  margin: 130px 0 60px;
   background-color: ${({ bgColor }) => bgColor};
   color: ${({ color }) => color};
   display: flex;

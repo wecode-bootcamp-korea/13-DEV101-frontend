@@ -8,7 +8,7 @@ const SubCategory = ({ category }) => {
   const history = useHistory();
   const btnClicked = (e) => {
     const btnVal = e.target.value;
-    history.push(`searchPage?query=${btnVal}`);
+    history.push(`/searchPage?query=${btnVal}`);
   };
 
   return (

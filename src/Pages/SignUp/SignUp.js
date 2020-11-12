@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { GrFacebook, GrApple } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
+import { JHAPI } from "../../config";
 
 const SignUp = () => {
   const BUTTONS = [
@@ -31,24 +33,29 @@ const SignUp = () => {
     isInputPasswordCheck: "",
   });
 
-  const API = "http://10.58.5.35:8000/user/signup";
-
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const onSubmit = (data) => {
-    console.log(data);
-    fetch(API, {
-      method: "POST",
-      body: JSON.stringify({
+    axios
+      .post(`${JHAPI}/user/signup`, {
         name: isInputValue.isInputUserName,
         email: isInputValue.isInputEmail,
         phone_number: isInputValue.isInputPhoneNumber,
         password: isInputValue.isInputPassword,
         re_password: isInputValue.isInputPasswordCheck,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => console.log("결과:", result));
+      })
+      .then((res) => {
+        if (res.status === 201) {
+          alert("회원가입에 성공했습니다!");
+          history.push("/Login");
+        }
+      })
+      .catch((err) => {
+        if (err.message.includes("409")) {
+          alert("이미 가입된 회원입니다.");
+        }
+      });
   };
 
   const handleChangeInput = (e) => {
@@ -74,10 +81,6 @@ const SignUp = () => {
               name="isInputUserName"
               onChange={handleChangeInput}
               placeholder="홍길동"
-              ref={register({
-                required: "이름을 입력해주세요.",
-                minLength: 3,
-              })}
             />
             {errors.userName?.type === "minLength" && <span> 3글자 이상 !!!</span>}
           </div>
@@ -88,8 +91,12 @@ const SignUp = () => {
               name="isInputEmail"
               onChange={handleChangeInput}
               placeholder="example@example.com"
-              ref={register}
             />
+            {!isInputValue.isInputEmail?.includes("@") ? (
+              <span>이메일 주소를 정확히 입력해주세요.</span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="phoneNumber">
             <label>휴대전화 번호</label>
@@ -98,12 +105,12 @@ const SignUp = () => {
               name="isInputPhoneNumber"
               onChange={handleChangeInput}
               placeholder="-를 제외한 휴대폰 번호를 입력해주세요"
-              ref={register({
-                required: "휴대전화을 입력해주세요.",
-                minLength: 10,
-              })}
             />
-            {errors.phoneNumber?.type === "minLength" && <span> 숫자 11개 !!!</span>}
+            {isInputValue.isInputPhoneNumber?.length <= 10 ? (
+              <span>휴대전화번호를 정확히 입력해주세요.</span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="password">
             <label>비밀번호(8자 이상)</label>
@@ -112,11 +119,12 @@ const SignUp = () => {
               name="isInputPassword"
               onChange={handleChangeInput}
               placeholder="********"
-              ref={register({
-                minLength: 8,
-              })}
             />
-            {errors.password?.type === "minLength" && <span> 비밀번호 최소 8글자 !!!</span>}
+            {isInputValue.isInputPassword?.length < 8 ? (
+              <span> 비밀번호는 최소 8자 입니다.</span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="passwordConfirm">
             <label>비밀번호 확인</label>
@@ -125,12 +133,12 @@ const SignUp = () => {
               name="isInputPasswordCheck"
               onChange={handleChangeInput}
               placeholder="********"
-              ref={register({
-                required: "비밀번호를 확인해주세요.",
-                minLength: 8,
-              })}
             />
-            {errors.passwordCheck?.type === "minLength" && <span> 비밀번호 최소 8글자 !!!</span>}
+            {isInputValue.isInputPasswordCheck !== isInputValue.isInputPassword ? (
+              <span> 비밀번호가 일치하지 않습니다.</span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="checkbox">
             <label>
@@ -178,6 +186,7 @@ const LoginPageForm = styled.div`
       background-color: #e8f0fe;
       border: none;
       border-radius: 5px;
+      margin: 10px 0;
     }
   }
 
@@ -190,7 +199,8 @@ const LoginPageForm = styled.div`
     font-size: 14px;
 
     span {
-      padding: 10px 0;
+      display: inline-block;
+      margin-bottom: 10px;
       color: #ff5252;
     }
   }
@@ -206,6 +216,7 @@ const LoginPageForm = styled.div`
     align-items: center;
 
     span {
+      display: inline-block;
       font-size: 12px;
       color: #a8aeb3;
     }

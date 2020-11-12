@@ -54,13 +54,13 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
       await axios.post(`${API}${productId}/post/${post_id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: localStorage.getItem("token"),
+          Authorization: localStorage.getItem("TOKEN"),
         },
       });
       await axios
         .get(`${API}${productId}`, {
           headers: {
-            Authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("TOKEN"),
           },
         })
         .then((res) => {
