@@ -17,9 +17,6 @@ const Nav = () => {
   const isNavActive = !(pathname === "/Login");
   const isNavBottomActive = !(pathname === "/SignUp" || pathname === "/myPage");
 
-  console.log(pathname);
-  console.log(isNavActive);
-
   const searchBoxFocus = () => {
     setIsFocus(!isFocus);
   };
@@ -29,6 +26,8 @@ const Nav = () => {
     e.preventDefault();
     history.push(`searchPage?query=${inputValue}`);
   };
+
+  console.log(inputValue);
 
   const logout = () => {
     setIsLogin(false);
@@ -43,7 +42,6 @@ const Nav = () => {
   const kakaoToken = localStorage.getItem("Kakao_token");
 
   const Token = localStorage.getItem("Token");
-  console.log(localStorage);
 
   const isVisibleUserBox = () => {
     setIsClick(!isClick);
