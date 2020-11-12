@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
 import LoginAnother from "./LoginAnother";
 import styled from "styled-components";
 import { RiEarthFill, RiKakaoTalkFill } from "react-icons/ri";
 
 const Login = () => {
   const [isLoginAnother, setIsLoginAnother] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidPw, setIsValidPw] = useState(true);
   const [isInputEmail, setIsInputEmail] = useState("");
   const [isInputPw, setIsInputPw] = useState("");
   const [isMounted, setIsMounted] = useState(false);
@@ -41,7 +38,7 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((res) => {
-            localStorage.setItem("Kakao_token", res.Authorization);
+            localStorage.setItem("Kakao_token", res.access_token);
             if (res.access_token) {
               alert(res.access_token);
               history.push("/");
@@ -58,7 +55,9 @@ const Login = () => {
       <LoginPageBody>
         <LoginPage>
           <LoginPageHeader>
-            <img src="../Images/dev101.png" alt="logo" />
+            <Link to="/">
+              <img src="../Images/dev101.png" alt="logo" />
+            </Link>
             <div className="selectLang">
               <RiEarthFill />
               <select>

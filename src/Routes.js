@@ -5,13 +5,13 @@ import { ThemeProvider } from "styled-components";
 import Login from "./Pages/Login/Login";
 import LoginAnother from "./Pages/Login/LoginAnother";
 import SignUp from "./Pages/SignUp/SignUp";
+import Nav from "./Components/Nav/Nav";
 import Main from "./Pages/Main/Main";
 import MyPage from "../src/Pages/MyPage/MyPage";
 import SearchPage from "./Pages/SearchPage/SearchPage";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
-import Nav from "./Components/Nav/Nav";
 import PackageSelector from "./Pages/PackageSelector";
 import Payment from "./Pages/Payment";
 import CardPayment from "./Pages/CardPayment";
@@ -20,7 +20,7 @@ const Routes = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
-          {/* <Nav /> */}
+          <Nav />
           <Switch>
             <Route exact path="/detail/:id" component={Detail} />
             <Route exact path="/" component={Main} />
