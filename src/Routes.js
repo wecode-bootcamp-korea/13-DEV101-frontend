@@ -9,6 +9,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Main from "./Pages/Main/Main";
 import MyPage from "../src/Pages/MyPage/MyPage";
 import SearchPage from "./Pages/SearchPage/SearchPage";
+import Footer from "./Components/Footer";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
@@ -28,6 +29,7 @@ const Routes = () => {
             <Route exact path="/searchPage/" component={SearchPage} />
             <Route exact path="/searchPage/:searchVal" component={SearchPage} />
           </Switch>
+          <Footer />
         </Router>
       </ThemeProvider>
     </Provider>
