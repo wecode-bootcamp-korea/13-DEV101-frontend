@@ -4,20 +4,14 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const LearningGoal = () => {
-  const to_learn = useSelector(
-    (state) => state.DetailReducer.detail.class_info?.to_learn,
-  );
+  const to_learn = useSelector((state) => state.DetailReducer.detail.class_info?.to_learn);
 
   return (
     <LearningGoalWrap>
       <h2>이런 걸 배울 거에요</h2>
-      <Swiper
-        spaceBetween={0}
-        slidesPerView={2.5}
-        scrollbar={{ draggable: true }}
-      >
+      <Swiper spaceBetween={0} slidesPerView={2.5} scrollbar={{ draggable: true }}>
         {to_learn?.map(({ title, description, image_url }) => (
-          <SwiperSlide>
+          <SwiperSlide key={description}>
             <span>
               <p>{description}</p>
               <img src={image_url} alt="Learnning" />

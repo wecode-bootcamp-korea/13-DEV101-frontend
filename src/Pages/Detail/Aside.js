@@ -23,9 +23,7 @@ const Aside = () => {
   const [isHeartToggle, setIsHeartToggle] = useState(false);
   const [level, setLevel] = useState("");
   const history = useHistory();
-  const { detailAside, productId } = useSelector(
-    (state) => state.DetailReducer,
-  );
+  const { detailAside, productId } = useSelector((state) => state.DetailReducer);
   const contentItems = [
     [<AiOutlineYoutube size="18" />, <span>콘텐츠 이용권</span>],
     [<AiFillGift size="18" />, <span>준비물 키트</span>],
@@ -34,15 +32,7 @@ const Aside = () => {
   ];
 
   useEffect(() => {
-    const {
-      category,
-      creator_name,
-      title,
-      liked,
-      level,
-      price,
-      heart,
-    } = detailAside;
+    const { category, creator_name, title, liked, level, price, heart } = detailAside;
     setCategory(category);
     setCreatorName(creator_name);
     setClassTitle(title);
@@ -91,7 +81,7 @@ const Aside = () => {
         <Hr />
         <div className="contentInfo">
           {contentItems.map(([icon, desc]) => (
-            <div>
+            <div key={desc}>
               {icon}
               <span>{desc}</span>
             </div>
@@ -111,11 +101,7 @@ const Aside = () => {
           <div onClick={heartButtonClick} className="heartButton">
             <div>
               <span>
-                {isHeartToggle ? (
-                  <AiFillHeart style={{ color: "#fc3d46" }} />
-                ) : (
-                  <AiOutlineHeart />
-                )}
+                {isHeartToggle ? <AiFillHeart style={{ color: "#fc3d46" }} /> : <AiOutlineHeart />}
               </span>
               <span>{heartCount}</span>
             </div>

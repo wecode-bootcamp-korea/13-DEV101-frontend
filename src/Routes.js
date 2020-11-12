@@ -16,8 +16,11 @@ const Routes = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
+          {/* <Nav /> */}
           <Switch>
             <Route exact path="/detail/:id" component={Detail} />
+            <Route exact path="/" component={Main} />
+            <Route exact path="/Login" component={Login} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/LoginAnother" component={LoginAnother} />

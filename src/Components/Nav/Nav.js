@@ -10,10 +10,7 @@ const Nav = () => {
         <MainHeader>
           <img className="logo" src="../Images/dev101.png" alt="logo" />
           <div>
-            <input
-              className="searchInputBox"
-              placeholder="배우고 싶은 것이 있나요?"
-            />
+            <input className="searchInputBox" placeholder="배우고 싶은 것이 있나요?" />
             <BsSearch />
           </div>
           <div className="navigationContainer">

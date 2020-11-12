@@ -20,8 +20,8 @@ const CreatorMessage = () => {
         pagination={{ clickable: true }}
         scrollbar={{ draggable: true }}
       >
-        {notice.map(({ profile_image, nickname, date, description }) => (
-          <SwiperSlide>
+        {notice.map(({ profile_image, nickname, date, description }, i) => (
+          <SwiperSlide key={i}>
             <MessageItem img={profile_image} nickname={nickname} date={date}>
               {description}
             </MessageItem>

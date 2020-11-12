@@ -60,8 +60,8 @@ const Login = () => {
             <div className="selectLang">
               <RiEarthFill />
               <select>
-                {selectObj.map((el) => (
-                  <option>{el}</option>
+                {selectObj.map((el, i) => (
+                  <option key={i}>{el}</option>
                 ))}
               </select>
             </div>

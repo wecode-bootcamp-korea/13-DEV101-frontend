@@ -23,7 +23,7 @@ const HeadModal = ({ handleModal, handleSlick, slickWidth, currentPage }) => {
         <div className="modal">
           <div>
             {headerImages.map(({ src }) => (
-              <div>
+              <div key={src}>
                 <img src={src} alt="headerImage" />
               </div>
             ))}

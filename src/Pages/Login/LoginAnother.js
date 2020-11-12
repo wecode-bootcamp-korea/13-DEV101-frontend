@@ -6,12 +6,7 @@ import { RiKakaoTalkFill } from "react-icons/ri";
 import { GrFacebook, GrApple } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
 
-const LoginAnother = ({
-  isInputEmail,
-  isInputPw,
-  inputEmailId,
-  inputEmailPw,
-}) => {
+const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) => {
   const BUTTONS = [
     {
       flatform: "kakao",
@@ -86,9 +81,7 @@ const LoginAnother = ({
                 minLength: 8,
               })}
             />
-            {errors.password?.type === "minLength" && (
-              <span>❗️8글자 이상 !!!</span>
-            )}
+            {errors.password?.type === "minLength" && <span>❗️8글자 이상 !!!</span>}
           </div>
           <div className="forgotPw">
             <span>비밀번호를 잊으셨나요?</span>
@@ -100,9 +93,9 @@ const LoginAnother = ({
           <Button type="submit">로그인</Button>
         </form>
         <div className="btnContainer">
-          {BUTTONS.map(({ flatform, desc, icon }) => {
+          {BUTTONS.map(({ flatform, desc, icon }, i) => {
             return (
-              <Button flatform={flatform}>
+              <Button key={i} flatform={flatform}>
                 {icon}
                 {desc}
               </Button>

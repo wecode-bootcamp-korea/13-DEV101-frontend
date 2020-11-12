@@ -16,9 +16,7 @@ import { Hr } from "../../utils";
 
 const Payment = () => {
   const dispatch = useDispatch();
-  const ClassInfo = useSelector(
-    (state) => state.PaymentReducer.currentClassInfo,
-  );
+  const ClassInfo = useSelector((state) => state.PaymentReducer.currentClassInfo);
   const UserInfo = useSelector((state) => state.PaymentReducer.userInfo);
   const history = useHistory();
   const [method, setMethod] = useState("card");
@@ -72,8 +70,7 @@ const Payment = () => {
                 <span> 받으시는 분 </span> <input value={name} type="text" />
               </div>
               <div>
-                <span> 휴대폰 정보 </span>{" "}
-                <input value={phoneNumber} type="text" />
+                <span> 휴대폰 정보 </span> <input value={phoneNumber} type="text" />
               </div>
             </div>
           </ContactInfo>
