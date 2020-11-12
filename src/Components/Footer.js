@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { INC_LIST, SOCIAL_MEDIA } from "./FooterInfo";
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  const isFooterActive = !(pathname.includes("payment") || pathname.includes("creators"));
+
   return (
-    <StyledFooter>
+    <StyledFooter isFooterActive={isFooterActive}>
       <FooterWrapper>
         <div>
           <div>
@@ -77,9 +81,9 @@ const Footer = () => {
 };
 
 const StyledFooter = styled.footer`
+  display: ${({ isFooterActive }) => (isFooterActive ? "flex" : "none")};
   margin-top: 100px;
   padding: 30px 0;
-  display: flex;
   justify-content: center;
   border-top: 1px solid #d9d9d9;
   font-size: 14px;
