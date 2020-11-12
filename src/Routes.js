@@ -14,9 +14,8 @@ import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
 import Creators from "./Pages/Creators";
-import Nav from "./Components/Nav/Nav";
 import PackageSelector from "./Pages/PackageSelector";
-import Payment from "./Pages/Payment";
+import Payment from "./Pages/SearchPage";
 import CardPayment from "./Pages/CardPayment";
 const Routes = () => {
   return (

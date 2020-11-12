@@ -21,7 +21,6 @@ const Nav = () => {
   };
 
   const submitSearchBox = (e) => {
-    console.log(inputValue);
     e.preventDefault();
     history.push(`searchPage?query=${inputValue}`);
   };
@@ -30,7 +29,7 @@ const Nav = () => {
 
   const logout = () => {
     setIsLogin(false);
-    window.localStorage.removeItem("Token");
+    window.localStorage.removeItem("token");
     window.localStorage.removeItem("Kakao_token");
     window.localStorage.removeItem("kakao_413e1c12ccf6ca665f31d81c93ac39b6");
 
@@ -47,7 +46,7 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/Data/myPageMockData.json")
+    fetch("http://10.58.7.92:8000/user/me")
       .then((res) => res.json())
       .then((res) => {
         setMockData(res.myPageMock.my_info);

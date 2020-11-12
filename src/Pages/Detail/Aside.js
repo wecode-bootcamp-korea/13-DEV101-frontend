@@ -45,21 +45,31 @@ const Aside = ({ classId }) => {
   };
 
   const heartButtonClick = () => {
-    axios.post(`${API}${productId}/like`).then((res) => {
-      console.log(res);
-      if (!isHeartToggle) {
-        setHeartCount(res.data.like_count);
-        setIsHeartToggle(true);
-      } else {
-        const result = window.confirm(
-          "정말로 취소하시겠습니까? 알림 및 혜택을 받지 못하실 수 있습니다.",
-        );
-        if (result) {
+    axios
+      .post(
+        `${API}${productId}/like`,
+        {},
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        },
+      )
+      .then((res) => {
+        console.log(res);
+        if (!isHeartToggle) {
           setHeartCount(res.data.like_count);
-          setIsHeartToggle(false);
+          setIsHeartToggle(true);
+        } else {
+          const result = window.confirm(
+            "정말로 취소하시겠습니까? 알림 및 혜택을 받지 못하실 수 있습니다.",
+          );
+          if (result) {
+            setHeartCount(res.data.like_count);
+            setIsHeartToggle(false);
+          }
         }
-      }
-    });
+      });
   };
 
   return (

@@ -46,7 +46,6 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
   const PostCommnet = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("user_id", 1);
     if (currentFile?.name) {
       formData.append("file", currentFile, currentFile.name);
     }
@@ -55,11 +54,19 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
       await axios.post(`${API}${productId}/post/${post_id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: localStorage.getItem("token"),
         },
       });
-      await axios.get(`${API}${productId}`).then((res) => {
-        dispatch(getClassCommunity(res.data.community));
-      });
+      await axios
+        .get(`${API}${productId}`, {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          dispatch(getClassCommunity(res.data.community));
+        });
     } catch (err) {
       console.error(err);
     }
