@@ -17,7 +17,7 @@ const Review = () => {
           <h5>클래스 후기</h5> <h3>{reviews?.review_length}</h3>
         </div>
         <div>
-          <h5>클래스 만족도</h5> <h3>{reviews?.satis}%</h3>
+          <h5>클래스 만족도</h5> <h3>{Math.ceil(reviews?.satis)}%</h3>
         </div>
       </span>
       <div className="reviewList">

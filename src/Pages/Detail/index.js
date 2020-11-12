@@ -35,8 +35,6 @@ const Detail = () => {
 
   const { id: classId } = useParams();
 
-  console.log(classId);
-
   const { detail, headerImages } = useSelector((store) => store.DetailReducer);
   const dispatch = useDispatch();
   const focusTarget = useRef([]);

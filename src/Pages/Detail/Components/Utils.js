@@ -6,8 +6,6 @@ import { AiOutlineClose } from "react-icons/ai";
 export const API = "http://10.58.1.45:8000/product/";
 export const APIPOST = "http://10.58.1.45:8000/product/1/post/1";
 
-export const APILIKE = "http://10.58.1.45:8000/product/1/like";
-
 export const Hr = ({ margin }) => {
   return (
     <HrWrap margin={margin}>

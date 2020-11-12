@@ -12,7 +12,7 @@ import {
   AiFillHeart,
 } from "react-icons/ai";
 import Button from "./Components/Button";
-import { Hr, APILIKE, Tooltip } from "./Components/Utils";
+import { Hr, API, Tooltip } from "./Components/Utils";
 
 const Aside = () => {
   const [category, setCategory] = useState("");
@@ -21,25 +21,23 @@ const Aside = () => {
   const [price, setPrice] = useState("");
   const [heartCount, setHeartCount] = useState(0);
   const [isHeartToggle, setIsHeartToggle] = useState(false);
-  const [level, setLevel] = useState("");
   const history = useHistory();
-  const { detailAside, productId } = useSelector((state) => state.DetailReducer);
+  const { detail, detailAside, productId } = useSelector((state) => state.DetailReducer);
   const contentItems = [
     [<AiOutlineYoutube size="18" />, <span>콘텐츠 이용권</span>],
     [<AiFillGift size="18" />, <span>준비물 키트</span>],
-    [<AiOutlineUser size="18" />, <span>{level} 대상</span>],
+    [<AiOutlineUser size="18" />, <span>{detail?.class_info?.level} 대상</span>],
     [<AiOutlineLike size="18" />, <span>개인 만족도</span>],
   ];
 
   useEffect(() => {
-    const { category, creator_name, title, liked, level, price, heart } = detailAside;
+    const { category, creator_name, title, liked, price, heart } = detailAside;
     setCategory(category);
     setCreatorName(creator_name);
     setClassTitle(title);
     setIsHeartToggle(liked);
-    setLevel(level);
     // setStatus(res.data.detail_aside.status);
-    setPrice(Number(price).toLocaleString("en"));
+    setPrice(price);
     setHeartCount(heart);
   }, [detailAside]);
 
@@ -48,7 +46,8 @@ const Aside = () => {
   };
 
   const heartButtonClick = () => {
-    axios.post(APILIKE).then((res) => {
+    axios.post(`${API}${productId}/like`).then((res) => {
+      console.log(res);
       if (!isHeartToggle) {
         setHeartCount(res.data.like_count);
         setIsHeartToggle(true);
@@ -76,12 +75,12 @@ const Aside = () => {
         </span>
         <span className="installment">
           <div>5개월 할부</div>
-          <h4>월 {price}원</h4>
+          <h4>월 {Number(Math.ceil(price / 5)).toLocaleString("en")}원</h4>
         </span>
         <Hr />
         <div className="contentInfo">
-          {contentItems.map(([icon, desc]) => (
-            <div key={desc}>
+          {contentItems.map(([icon, desc], i) => (
+            <div key={i}>
               {icon}
               <span>{desc}</span>
             </div>
