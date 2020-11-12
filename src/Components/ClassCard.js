@@ -54,11 +54,7 @@ const ClassCard = ({
     <ClassCardComponent cardWidth={cardWidth}>
       <Link to={`/detail/${product_id}`}>
         <HoverImgBox>
-          {coupon && (
-            <span style={{ display: coupon === "0" ? "none" : "block" }}>
-              {coupon}
-            </span>
-          )}
+          {coupon && <span style={{ display: coupon === "0" ? "none" : "block" }}>{coupon}</span>}
           <ImgWithProps
             src={
               image_url ||
