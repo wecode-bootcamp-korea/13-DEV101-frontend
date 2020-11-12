@@ -43,7 +43,8 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
     setCurrentComment(e.target.value);
   };
 
-  const PostCommnet = async () => {
+  const PostCommnet = async (e) => {
+    e.preventDefault();
     console.log(post_id);
     const formData = new FormData();
     formData.append("user_id", 1);
@@ -61,7 +62,6 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
         console.log(res.data);
         dispatch(getClassCommunity(res.data.community));
       });
-      // console.log(community);
     } catch (err) {
       console.error(err);
     }
@@ -102,7 +102,7 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
           <img src={imgBase64} alt="imagePreview" />
         </ImagePreview>
       )}
-      <form className="postInput" encType="multipart/form-data">
+      <form onSubmit={PostCommnet} className="postInput" encType="multipart/form-data">
         <input
           type="file"
           onChange={fileHandler}
@@ -119,9 +119,9 @@ const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => 
           onChange={HandleComment}
           placeholder="댓글을 입력해주세요."
         />
-        <div onClick={PostCommnet} className="postBtn">
+        <button type="submit" className="postBtn">
           <AiOutlineSend size={22} />
-        </div>
+        </button>
       </form>
     </CommunityPostWrap>
   );

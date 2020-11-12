@@ -26,7 +26,9 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (values) => {
-    const loginAPI = "http://10.58.7.131:8000/user/signin";
+    console.log(values);
+
+    const loginAPI = "http://10.58.5.35:8000/user/signin";
 
     fetch(loginAPI, {
       method: "post",
@@ -85,10 +87,9 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
           </div>
           <div className="forgotPw">
             <span>비밀번호를 잊으셨나요?</span>
-            <span>
-              <Link to="/SignUp" />
-              회원 가입하기
-            </span>
+            <Link to="/SignUp">
+              <span>회원 가입하기</span>
+            </Link>
           </div>
           <Button type="submit">로그인</Button>
         </form>
