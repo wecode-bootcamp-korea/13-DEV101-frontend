@@ -8,6 +8,7 @@ import SignUp from "./Pages/SignUp/SignUp";
 import Main from "./Pages/Main/Main";
 import MyPage from "../src/Pages/MyPage/MyPage";
 import SearchPage from "./Pages/SearchPage/SearchPage";
+import Footer from "./Components/Footer";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
@@ -37,6 +38,7 @@ const Routes = () => {
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/LoginAnother" component={LoginAnother} />
           </Switch>
+          <Footer />
         </Router>
       </ThemeProvider>
     </Provider>
