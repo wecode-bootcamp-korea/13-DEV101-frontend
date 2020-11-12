@@ -40,8 +40,8 @@ const MyPageSlider = ({ cardDataList, title }) => {
             prevArrow={<Arrow type="prev" />}
           >
             {cardDataList &&
-              cardDataList.map((cardData) => {
-                return <ClassCard cardWidth={243} {...cardData} />;
+              cardDataList.map((cardData, i) => {
+                return <ClassCard key={i} cardWidth={243} {...cardData} />;
               })}
           </StyledSlider>
         </div>

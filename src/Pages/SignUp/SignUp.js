@@ -30,20 +30,12 @@ const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
         <form>
           <div className="userName">
             <p>이름</p>
-            <input
-              value={isInput}
-              onChange={handleInput}
-              placeholder="홍길동"
-            />
+            <input value={isInput} onChange={handleInput} placeholder="홍길동" />
             {!isValidEmail && <span>이름을 입력해주세요.</span>}
           </div>
           <div className="email">
             <p>이메일</p>
-            <input
-              value={isInput}
-              onChange={handleInput}
-              placeholder="example@example.com"
-            />
+            <input value={isInput} onChange={handleInput} placeholder="example@example.com" />
             {!isValidPw && <span>이메일을 입력해주세요.</span>}
           </div>
           <div className="phoneNumber">
@@ -57,28 +49,20 @@ const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
           </div>
           <div className="password">
             <p>비밀번호(8자 이상)</p>
-            <input
-              value={isInput}
-              onChange={handleInput}
-              placeholder="********"
-            />
+            <input value={isInput} onChange={handleInput} placeholder="********" />
             {!isValidPw && <span>패스워드를 입력해주세요.</span>}
           </div>
           <div className="passwordConfirm">
             <p>비밀번호 확인</p>
-            <input
-              value={isInput}
-              onChange={handleInput}
-              placeholder="********"
-            />
+            <input value={isInput} onChange={handleInput} placeholder="********" />
             {!isValidPw && <span>패스워드 확인을 입력해주세요.</span>}
           </div>
           <Button>동의하고 회원가입</Button>
         </form>
         <div className="btnContainer">
-          {BUTTONS.map(({ flatform, desc, icon }) => {
+          {BUTTONS.map(({ flatform, desc, icon }, i) => {
             return (
-              <Button flatform={flatform}>
+              <Button key={i} flatform={flatform}>
                 {icon}
                 {desc}
               </Button>

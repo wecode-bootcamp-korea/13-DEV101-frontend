@@ -31,18 +31,11 @@ const Review = () => {
       </div>
       <Hr margin="32px 0" />
       <div className="commentList">
-        {reviews.comment_list?.map(
-          ({ id, profile_image, nickname, date, description }, i) => (
-            <ReviewComment
-              key={i}
-              img={profile_image}
-              nickname={nickname}
-              date={date}
-            >
-              {description}
-            </ReviewComment>
-          ),
-        )}
+        {reviews.comment_list?.map(({ id, profile_image, nickname, date, description }, i) => (
+          <ReviewComment key={i} img={profile_image} nickname={nickname} date={date}>
+            {description}
+          </ReviewComment>
+        ))}
       </div>
       <Hr margin="32px 0" />
     </ReviewWrap>

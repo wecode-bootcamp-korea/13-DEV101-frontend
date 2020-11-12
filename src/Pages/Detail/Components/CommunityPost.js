@@ -7,14 +7,7 @@ import CommunityComment from "./CommunityComment";
 import { getClassCommunity } from "../../../store/DetailReducer";
 import { Hr, API, ProfileImages } from "./Utils";
 
-const CommunityPost = ({
-  img,
-  nickname,
-  date,
-  children,
-  comments,
-  post_id,
-}) => {
+const CommunityPost = ({ img, nickname, date, children, comments, post_id }) => {
   const fileRef = useRef();
   const dispatch = useDispatch();
   const [currentFile, setCurrentFile] = useState(null);

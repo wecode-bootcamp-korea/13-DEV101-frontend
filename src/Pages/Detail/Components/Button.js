@@ -1,23 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Button = ({
-  onClick,
-  children,
-  subText,
-  bgcolor,
-  color,
-  width,
-  weight,
-}) => {
+const Button = ({ onClick, children, subText, bgcolor, color, width, weight }) => {
   return (
-    <ButtonStyle
-      onClick={onClick}
-      bgcolor={bgcolor}
-      color={color}
-      width={width}
-      weight={weight}
-    >
+    <ButtonStyle onClick={onClick} bgcolor={bgcolor} color={color} width={width} weight={weight}>
       <span>{children}</span>
       <p>{subText}</p>
     </ButtonStyle>
