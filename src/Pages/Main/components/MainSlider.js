@@ -52,7 +52,7 @@ const scrollBarAni = keyframes`
 `;
 
 const MainSliderWrapper = styled.div`
-  margin: 100px 0 150px;
+  margin: 130px 0 150px;
   position: relative;
   .swiper-container {
     overflow: unset !important;

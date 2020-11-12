@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { GrFacebook, GrApple } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
+import { JHAPI } from "../../config";
 
 const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) => {
   const BUTTONS = [
@@ -24,9 +25,10 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
   ];
 
   const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
 
   const onSubmit = (values) => {
-    const loginAPI = "http://10.58.5.45:8000/user/signin";
+    const loginAPI = `${JHAPI}/user/signin`;
 
     fetch(loginAPI, {
       method: "post",
@@ -37,8 +39,19 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.success) {
-          alert("저장 완료");
+        // if (res.success) {
+        //   alert("저장 완료");
+        // }
+        console.log(res);
+        if (res.message === "SUCCESS") {
+          localStorage.setItem("TOKEN", res.TOKEN);
+          history.push("/");
+        }
+        if (res.message === "INVALID_USER") {
+          alert("가입되지 않은 회원입니다.");
+        }
+        if (res.message === "PASSWORD_ERROR") {
+          alert("비밀번호를 확인해주세요.");
         }
       });
   };
@@ -58,15 +71,7 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
               value={isInputEmail}
               onChange={inputEmailId}
               placeholder="example@naver.com"
-              ref={register({
-                required: "❗️이메일 입력하세요",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: "❗️이메일 형식 확인 !!!",
-                },
-              })}
             />
-            {errors.email && <span>{errors.email.message}</span>}
           </div>
           <div className="password">
             <label>비밀번호</label>
@@ -76,12 +81,7 @@ const LoginAnother = ({ isInputEmail, isInputPw, inputEmailId, inputEmailPw }) =
               value={isInputPw}
               onChange={inputEmailPw}
               placeholder="********"
-              ref={register({
-                required: "❗️비밀번호를 입력하세요",
-                minLength: 8,
-              })}
             />
-            {errors.password?.type === "minLength" && <span>❗️8글자 이상 !!!</span>}
           </div>
           <div className="forgotPw">
             <span>비밀번호를 잊으셨나요?</span>

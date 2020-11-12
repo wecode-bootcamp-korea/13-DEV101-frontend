@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation, useParams } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
+import { JHAPI } from "../../config";
 
 const Nav = () => {
-  const params = useParams();
   const history = useHistory();
   const { pathname } = useLocation();
   const [isLogin, setIsLogin] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [isClick, setIsClick] = useState(false);
-  const [mockData, setMockData] = useState([]);
+  const [userInfo, setUserInfo] = useState({});
   const isNavActive = !(
     pathname === "/Login" ||
     pathname.includes("payment") ||
     pathname.includes("creators")
   );
   const isNavBottomActive = !(pathname === "/SignUp" || pathname === "/myPage");
-
-  console.log(!pathname.includes("payment"));
 
   const searchBoxFocus = () => {
     setIsFocus(!isFocus);
@@ -32,43 +30,54 @@ const Nav = () => {
     history.push(`searchPage?query=${inputValue}`);
   };
 
-  console.log(inputValue);
-
   const logout = () => {
     setIsLogin(false);
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("Kakao_token");
-    window.localStorage.removeItem("kakao_413e1c12ccf6ca665f31d81c93ac39b6");
+    window.localStorage.removeItem("TOKEN");
 
     isVisibleUserBox();
   };
 
-  const userToken = localStorage.getItem("kakao_413e1c12ccf6ca665f31d81c93ac39b6");
-  const kakaoToken = localStorage.getItem("Kakao_token");
-
-  const Token = localStorage.getItem("Token");
+  const Token = localStorage.getItem("TOKEN");
 
   const isVisibleUserBox = () => {
     setIsClick(!isClick);
   };
 
   useEffect(() => {
-    fetch("http://10.58.7.92:8000/user/me")
-      .then((res) => res.json())
-      .then((res) => {
-        setMockData(res.myPageMock.my_info);
-      });
+    if (localStorage.getItem("TOKEN")) {
+      fetch(`${JHAPI}/user/me`, {
+        headers: {
+          Authorization: localStorage.getItem("TOKEN"),
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          const myInfo = res.mypage[0].my_info;
+          setUserInfo({
+            user_name: myInfo.user_name,
+            user_profile: myInfo.profile_image,
+          });
+        });
+    }
   }, []);
 
   return (
-    <NavBar isNavActive={isNavActive}>
+    <NavBar className="nav" isNavActive={isNavActive} onClick={(e) => isVisibleUserBox(e)}>
       <NavContainer>
         {isClick && (
           <UserBox>
             <div>
-              <img className="userIcon" src={mockData.profile_image} alt="profile" />
+              <img
+                className="userIcon"
+                src={
+                  userInfo.user_profile
+                    ? userInfo.user_profile
+                    : "https://www.pngfind.com/pngs/m/378-3780189_member-icon-png-transparent-png.png"
+                }
+                alt="profile"
+              />
               <div>
-                <span>{mockData.user_name}</span>
+                <span>{userInfo.user_name}</span>
                 <Link to="/myPage" className="link">
                   <span>마이페이지</span>
                 </Link>
@@ -96,10 +105,10 @@ const Nav = () => {
               </div>
             </form>
           </div>
-          {Token || kakaoToken || userToken ? (
+          {Token ? (
             <div className="navAfterLogin">
               <div>
-                <Link to="/">
+                <Link to="/creators">
                   <span>크리에이터 지원</span>
                 </Link>
                 <Link to="/">
@@ -112,7 +121,15 @@ const Nav = () => {
                   <span>내 클래스</span>
                 </Link>
                 <div className="goToMyPage" onClick={isVisibleUserBox}>
-                  <img className="userIcon" src={mockData.profile_image} alt="profile" />
+                  <img
+                    className="userIcon"
+                    src={
+                      userInfo.user_profile
+                        ? userInfo.user_profile
+                        : "https://www.pngfind.com/pngs/m/378-3780189_member-icon-png-transparent-png.png"
+                    }
+                    alt="profile"
+                  />
                   <IoIosArrowDown className="arrowIcon" />
                 </div>
               </div>
@@ -120,7 +137,7 @@ const Nav = () => {
           ) : (
             <div className="navBeforeLogin">
               <div>
-                <Link to="/">
+                <Link to="/creators">
                   <span>크리에이터 지원</span>
                 </Link>
                 <Link
@@ -136,17 +153,19 @@ const Nav = () => {
           )}
         </MainHeader>
         <NavBottom isNavBottomActive={isNavBottomActive}>
-          <FiMenu />
+          <Link to="/">
+            <FiMenu />
+          </Link>
           <Link to="/">
             <span>전체</span>
           </Link>
-          <Link to="/">
+          <Link to="/category/크리에이티브">
             <span>크리에이티브</span>
           </Link>
           <Link to="/">
             <span>머니</span>
           </Link>
-          <Link to="/">
+          <Link to="/category/커리어">
             <span>커리어</span>
           </Link>
           <Link to="/">
@@ -170,12 +189,17 @@ export default Nav;
 
 const NavBar = styled.div`
   display: ${({ isNavActive }) => (isNavActive ? "block" : "none")};
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 555;
+  width: 100%;
+  background-color: #fff;
 `;
 
 const NavContainer = styled.div`
   width: 1176px;
   margin: 0 auto;
-  height: 44px;
   justify-content: center;
   align-items: center;
 `;
@@ -186,6 +210,12 @@ const MainHeader = styled.div`
   align-items: center;
   margin-top: 10px;
   padding-bottom: 15px;
+
+  input {
+    border: none;
+    outline: none;
+    box-shadow: 0px 1px 9px 1px rgba(0, 0, 0, 0.05);
+  }
 
   div {
     display: flex;
@@ -206,7 +236,7 @@ const MainHeader = styled.div`
 
   .logo {
     width: 110px;
-    margin-left: -10px;
+    margin: 0 15px 0 -10px;
   }
 
   .searchInputBox {
@@ -230,8 +260,8 @@ const MainHeader = styled.div`
   div {
     .userIcon {
       margin-left: 14px;
-      width: 34px;
-      height: 34px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       background: orange;
     }
@@ -244,10 +274,24 @@ const MainHeader = styled.div`
 
 const NavBottom = styled.div`
   margin-top: 15px;
-  width: 70%;
+  width: 100%;
   display: ${({ isNavBottomActive }) => (isNavBottomActive ? "flex" : "none")};
   justify-content: space-between;
-
+  background-color: #fff;
+  a {
+    padding: 15px;
+    &:nth-child(1) {
+      &:hover {
+        border: none;
+      }
+    }
+    &:hover {
+      border-bottom: 3px solid #000;
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
   span {
     padding-bottom: 10px;
     font-size: 16px;
@@ -257,7 +301,7 @@ const NavBottom = styled.div`
     &:hover {
       color: black;
       font-weight: 700;
-      border-bottom: 3px black solid;
+      /* border-bottom: 3px black solid; */
       cursor: pointer;
     }
   }
@@ -287,6 +331,7 @@ const UserBox = styled.div`
     align-items: center;
     justify-content: left;
     padding-left: 15px;
+
     &:hover {
       cursor: pointer;
     }

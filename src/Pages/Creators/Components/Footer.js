@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { CREATOR_API } from "../../utils";
+import { JHAPI } from "../../../config";
 import { useSelector } from "react-redux";
 
 const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }) => {
@@ -15,7 +15,6 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
   const { classTitle, coverBase, thumbnailBase } = useSelector(
     (state) => state.CreatorsReducer.titleAndCover,
   );
-  const infoImages = useSelector((state) => state.CreatorsReducer.infoImages);
 
   useEffect(() => {
     if (Number(brand) === 0) {
@@ -39,6 +38,7 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
     }
   };
   const handleNext = () => {
+    console.log(currentPage);
     if (currentPage === "intro") {
       handleCurrentPage("title");
       const formData = new FormData();
@@ -49,9 +49,9 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("level", level);
       try {
         axios
-          .post(`${CREATOR_API}basicinfo`, formData, {
+          .post(`${JHAPI}/user/basicinfo`, formData, {
             headers: {
-              Authorization: localStorage.getItem("token"),
+              Authorization: localStorage.getItem("TOKEN"),
             },
           })
           .then((res) => {
@@ -66,10 +66,10 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("file", thumbnailImg);
 
       try {
-        axios.post(`${CREATOR_API}covertitle/${productId}`, formData, {
+        axios.post(`${JHAPI}/user/covertitle/${productId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("TOKEN"),
           },
         });
       } catch (err) {
@@ -84,10 +84,10 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("file", info.one.src);
       formData.append("file", info.one.src);
       try {
-        axios.post(`${CREATOR_API}introduction/${productId}`, formData, {
+        axios.post(`${JHAPI}/user/introduction/${productId}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("TOKEN"),
           },
         });
       } catch (err) {

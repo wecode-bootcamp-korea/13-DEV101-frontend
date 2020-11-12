@@ -47,7 +47,7 @@ const Detail = () => {
     axios
       .get(`${API}${classId}`, {
         headers: {
-          Authorization: localStorage.getItem("token"),
+          Authorization: localStorage.getItem("TOKEN"),
         },
       })
       .then((res) => {

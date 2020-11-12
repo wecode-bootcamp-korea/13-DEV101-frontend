@@ -47,13 +47,14 @@ const InfiniteScroll = ({ dataList }) => {
 };
 
 const InfiniteScrollWrapper = styled.div`
+  margin-top: 24px;
   width: 100%;
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     li {
-      margin-bottom: 100px;
+      margin-bottom: 34px;
     }
   }
 `;

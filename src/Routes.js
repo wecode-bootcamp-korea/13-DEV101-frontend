@@ -18,16 +18,18 @@ import PackageSelector from "./Pages/PackageSelector";
 import Payment from "./Pages/SearchPage";
 import CardPayment from "./Pages/CardPayment";
 import Category from "./Pages/Category/Category";
+import ScrollToTop from "./Components/ScrollToTop";
 
 const Routes = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
+          <ScrollToTop />
           <Nav />
           <Switch>
             <Route exact path="/" component={Main} />
-            <Route exact path="/:id" component={Category} />
+            <Route exact path="/category/:id" component={Category} />
             <Route exact path="/detail/:id" component={Detail} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/SignUp" component={SignUp} />

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
 import LoginAnother from "./LoginAnother";
 import styled from "styled-components";
 import { RiEarthFill, RiKakaoTalkFill } from "react-icons/ri";
+import { JHAPI } from "../../config";
 
 const Login = () => {
   const [isLoginAnother, setIsLoginAnother] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidPw, setIsValidPw] = useState(true);
   const [isInputEmail, setIsInputEmail] = useState("");
   const [isInputPw, setIsInputPw] = useState("");
   const [isMounted, setIsMounted] = useState(false);
@@ -26,7 +24,7 @@ const Login = () => {
     setIsInputPw(e.target.value);
   };
 
-  const KakaoAPI = "http://10.58.5.35:8000/user/kakao/login";
+  const KakaoAPI = `${JHAPI}/user/kakao/login`;
   const { Kakao } = window;
   const history = useHistory();
 
@@ -41,9 +39,8 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((res) => {
-            localStorage.setItem("Kakao_token", res.Authorization);
             if (res.access_token) {
-              alert(res.access_token);
+              localStorage.setItem("TOKEN", res.access_token);
               history.push("/");
             }
           });
@@ -58,7 +55,9 @@ const Login = () => {
       <LoginPageBody>
         <LoginPage>
           <LoginPageHeader>
-            <img src="../Images/dev101.png" alt="logo" />
+            <Link to="/">
+              <img src="../Images/dev101.png" alt="logo" />
+            </Link>
             <div className="selectLang">
               <RiEarthFill />
               <select>
@@ -79,11 +78,11 @@ const Login = () => {
             <LoginPageForm>
               <div>
                 <p>준비물까지 챙겨주는 온라인 클래스</p>
-                <Button kakao onClick={() => loginWithKakao()}>
+                <Button kakao onClick={loginWithKakao}>
                   <RiKakaoTalkFill />
                   카카오로 3초 만에 시작하기
                 </Button>
-                <Button anotherWay onClick={loginToDifferentWays}>
+                <Button kakao={false} onClick={loginToDifferentWays}>
                   다른 방법으로 시작하기
                 </Button>
               </div>
@@ -160,6 +159,6 @@ const Button = styled.button`
   font-weight: 700;
   margin-top: 10px;
   border: none;
-  background-color: ${(kakao) => (kakao ? "#ffe812" : "#f8f8f9")};
-  color: ${(kakao) => (kakao ? "#000000" : "#3e4042")};
+  background-color: ${({ kakao }) => (kakao ? "#ffe812" : "#f8f8f9")};
+  color: ${({ kakao }) => (kakao ? "#000000" : "#3e4042")};
 `;

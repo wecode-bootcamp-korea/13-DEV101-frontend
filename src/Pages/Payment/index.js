@@ -55,7 +55,7 @@ const Payment = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("TOKEN"),
           },
         },
       );
@@ -76,7 +76,7 @@ const Payment = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("TOKEN"),
           },
         },
       );
