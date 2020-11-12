@@ -15,6 +15,8 @@ import Nav from "./Components/Nav/Nav";
 import PackageSelector from "./Pages/PackageSelector";
 import Payment from "./Pages/Payment";
 import CardPayment from "./Pages/CardPayment";
+import Category from "./Pages/Category/Category";
+
 const Routes = () => {
   return (
     <Provider store={store}>
@@ -22,8 +24,9 @@ const Routes = () => {
         <Router>
           {/* <Nav /> */}
           <Switch>
-            <Route exact path="/detail/:id" component={Detail} />
             <Route exact path="/" component={Main} />
+            <Route exact path="/:id" component={Category} />
+            <Route exact path="/detail/:id" component={Detail} />
             <Route exact path="/Login" component={Login} />
             <Route exact path="/SignUp" component={SignUp} />
             <Route exact path="/LoginAnother" component={LoginAnother} />
