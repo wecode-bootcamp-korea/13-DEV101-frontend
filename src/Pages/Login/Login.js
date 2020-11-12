@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import LoginAnother from "./LoginAnother";
-import axios from "axios";
 import styled from "styled-components";
 import { RiEarthFill, RiKakaoTalkFill } from "react-icons/ri";
-import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [isLoginAnother, setIsLoginAnother] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPw, setIsValidPw] = useState(true);
   const [isInputEmail, setIsInputEmail] = useState("");
   const [isInputPw, setIsInputPw] = useState("");
   const [isMounted, setIsMounted] = useState(false);
@@ -106,9 +108,6 @@ const LoginPageBackground = styled.div`
   background-repeat: none;
   width: 50%;
   height: 100vh;
-  position: absolute;
-  right: 0;
-  overflow: hidden;
 `;
 
 const LoginPage = styled.div`

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import styled from "styled-components";
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { GrFacebook, GrApple } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
 
-const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
+const SignUp = () => {
   const BUTTONS = [
     {
       flatform: "kakao",
@@ -21,43 +23,122 @@ const SignUp = ({ isValidEmail, isValidPw, isInput, handleInput }) => {
     { flatform: "apple", icon: <GrApple />, desc: "애플로 시작하기" },
   ];
 
+  const [isInputValue, setIsInputValue] = useState({
+    isInputUserName: "",
+    isInputEmail: "",
+    isInputPhoneNumber: "",
+    isInputPassword: "",
+    isInputPasswordCheck: "",
+  });
+
+  const API = "http://10.58.5.35:8000/user/signup";
+
+  const { register, handleSubmit, errors } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    fetch(API, {
+      method: "POST",
+      body: JSON.stringify({
+        name: isInputValue.isInputUserName,
+        email: isInputValue.isInputEmail,
+        phone_number: isInputValue.isInputPhoneNumber,
+        password: isInputValue.isInputPassword,
+        re_password: isInputValue.isInputPasswordCheck,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => console.log("결과:", result));
+  };
+
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+
+    setIsInputValue((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   return (
     <LoginPageForm>
       <div>
         <div className="loginTitle">
           <span>회원가입</span>
         </div>
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="userName">
-            <p>이름</p>
-            <input value={isInput} onChange={handleInput} placeholder="홍길동" />
-            {!isValidEmail && <span>이름을 입력해주세요.</span>}
+            <label>이름</label>
+            <input
+              type="text"
+              name="isInputUserName"
+              onChange={handleChangeInput}
+              placeholder="홍길동"
+              ref={register({
+                required: "이름을 입력해주세요.",
+                minLength: 3,
+              })}
+            />
+            {errors.userName?.type === "minLength" && <span> 3글자 이상 !!!</span>}
           </div>
           <div className="email">
-            <p>이메일</p>
-            <input value={isInput} onChange={handleInput} placeholder="example@example.com" />
-            {!isValidPw && <span>이메일을 입력해주세요.</span>}
+            <label>이메일</label>
+            <input
+              type="email"
+              name="isInputEmail"
+              onChange={handleChangeInput}
+              placeholder="example@example.com"
+              ref={register}
+            />
           </div>
           <div className="phoneNumber">
-            <p>휴대전화 번호</p>
+            <label>휴대전화 번호</label>
             <input
-              value={isInput}
-              onChange={handleInput}
+              type="number"
+              name="isInputPhoneNumber"
+              onChange={handleChangeInput}
               placeholder="-를 제외한 휴대폰 번호를 입력해주세요"
+              ref={register({
+                required: "휴대전화을 입력해주세요.",
+                minLength: 10,
+              })}
             />
-            {!isValidEmail && <span>휴대전화 번호를 입력해주세요.</span>}
+            {errors.phoneNumber?.type === "minLength" && <span> 숫자 11개 !!!</span>}
           </div>
           <div className="password">
-            <p>비밀번호(8자 이상)</p>
-            <input value={isInput} onChange={handleInput} placeholder="********" />
-            {!isValidPw && <span>패스워드를 입력해주세요.</span>}
+            <label>비밀번호(8자 이상)</label>
+            <input
+              type="password"
+              name="isInputPassword"
+              onChange={handleChangeInput}
+              placeholder="********"
+              ref={register({
+                minLength: 8,
+              })}
+            />
+            {errors.password?.type === "minLength" && <span> 비밀번호 최소 8글자 !!!</span>}
           </div>
           <div className="passwordConfirm">
-            <p>비밀번호 확인</p>
-            <input value={isInput} onChange={handleInput} placeholder="********" />
-            {!isValidPw && <span>패스워드 확인을 입력해주세요.</span>}
+            <label>비밀번호 확인</label>
+            <input
+              type="password"
+              name="isInputPasswordCheck"
+              onChange={handleChangeInput}
+              placeholder="********"
+              ref={register({
+                required: "비밀번호를 확인해주세요.",
+                minLength: 8,
+              })}
+            />
+            {errors.passwordCheck?.type === "minLength" && <span> 비밀번호 최소 8글자 !!!</span>}
           </div>
-          <Button>동의하고 회원가입</Button>
+          <div className="checkbox">
+            <label>
+              <input className="inputCheckbox" type="checkbox" name="checkbox" />
+              이벤트 및 할인소식 알림 동의(선택)
+            </label>
+          </div>
+          <Button type="submit">동의하고 회원가입</Button>
         </form>
         <div className="btnContainer">
           {BUTTONS.map(({ flatform, desc, icon }, i) => {
@@ -104,13 +185,19 @@ const LoginPageForm = styled.div`
   .email,
   .phoneNumber,
   .password,
-  .passwordConfirm {
+  .passwordConfirm,
+  .checkbox {
     font-size: 14px;
 
     span {
       padding: 10px 0;
       color: #ff5252;
     }
+  }
+
+  .inputCheckbox {
+    width: 15px;
+    height: 15px;
   }
 
   .forgotPw {
