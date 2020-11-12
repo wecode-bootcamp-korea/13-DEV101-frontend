@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import { FaRegHeart, FaHeart, FaThumbsUp, FaFireAlt } from "react-icons/fa";
 import styled from "styled-components";
+import { JHAPI } from "../config";
 
 const timePassed = (time) => {
   const BackDate = time.split(".").slice(0, 1)[0];
@@ -50,8 +52,32 @@ const ClassCard = ({
     }
   }, [discount, price]);
 
+  const likeBtnHandler = () => {
+    setIsLiked(!isLiked);
+    axios
+      .post(`${JHAPI}/product/${product_id}/like`, {
+        headers: {
+          Authorization: "userToken",
+        },
+      })
+      .then((res) => console.log(res));
+  };
+
+  const cheerBtnHanler = () => {
+    axios
+      .post(`${JHAPI}/product/${product_id}/cheer`, {
+        headers: {
+          Authorization: "userToken",
+        },
+      })
+      .then((res) => console.log(res));
+  };
+
   return (
     <ClassCardComponent cardWidth={cardWidth}>
+      <LikeBtn onClick={() => likeBtnHandler()}>
+        {isLiked ? <FaHeart fill="#f33340" /> : <FaRegHeart fill="#f8f8f8" />}
+      </LikeBtn>
       <Link to={`/detail/${product_id}`}>
         <HoverImgBox>
           {coupon && <span style={{ display: coupon === "0" ? "none" : "block" }}>{coupon}</span>}
@@ -62,9 +88,6 @@ const ClassCard = ({
             }
             alt="ClassThumbnails"
           />
-          <LikeBtn onClick={() => setIsLiked(!isLiked)}>
-            {isLiked ? <FaHeart fill="#f33340" /> : <FaRegHeart fill="#f8f8f8" />}
-          </LikeBtn>
         </HoverImgBox>
         <TextDiv>
           <Bold>
@@ -89,7 +112,7 @@ const ClassCard = ({
         </TextDiv>
         <TextDiv className="noBorder">
           {is_open === false ? (
-            <Button>응원하기</Button>
+            <Button onClick={() => cheerBtnHanler()}>응원하기</Button>
           ) : price ? (
             <>
               <p>
@@ -114,6 +137,7 @@ const ClassCard = ({
 
 const ClassCardComponent = styled.div`
   width: ${({ cardWidth }) => cardWidth || 267}px;
+  position: relative;
 `;
 
 const HoverImgBox = styled.div`
