@@ -10,8 +10,8 @@ const LearningGoal = () => {
     <LearningGoalWrap>
       <h2>이런 걸 배울 거에요</h2>
       <Swiper spaceBetween={0} slidesPerView={2.5} scrollbar={{ draggable: true }}>
-        {to_learn?.map(({ title, description, image_url }) => (
-          <SwiperSlide key={description}>
+        {to_learn?.map(({ title, description, image_url }, i) => (
+          <SwiperSlide key={i}>
             <span>
               <p>{description}</p>
               <img src={image_url} alt="Learnning" />

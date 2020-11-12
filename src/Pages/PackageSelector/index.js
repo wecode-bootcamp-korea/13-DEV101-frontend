@@ -14,12 +14,17 @@ const PackageSelector = () => {
   const packageInfo = useSelector((state) => state.PaymentReducer.packageInfo);
 
   useEffect(() => {
-    axios.get(`${API}${classId}/packages`).then((res) => {
-      dispatch(GetPackageInfo(res.data.package));
-    });
+    axios
+      .get(`${API}${classId}/packages`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        dispatch(GetPackageInfo(res.data.package));
+      });
   }, []);
 
-  useEffect(() => {}, [packageInfo]);
   return (
     <Wrap>
       <h2>패키지 선택하기</h2>
@@ -37,6 +42,7 @@ const PackageSelector = () => {
 export default PackageSelector;
 
 const Wrap = Styled.div`
+  padding-top: 60px;
   margin: 0 200px;
   h2 {
     font-size: 25px;

@@ -14,11 +14,17 @@ const Main = () => {
   let fetchCount = 0;
 
   useEffect(() => {
-    axios.get(`http://10.58.1.45:8000/products?offset=0&limit=16`).then(({ data }) => {
-      setTop10(data.top_10_data);
-      setPlanned(data.planned_data);
-      setUpdated(data.updated_data);
-    });
+    axios
+      .get(`http://10.58.1.45:8000/products?offset=0&limit=16`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then(({ data }) => {
+        setTop10(data.top_10_data);
+        setPlanned(data.planned_data);
+        setUpdated(data.updated_data);
+      });
     intersection();
   }, []);
 
@@ -29,9 +35,15 @@ const Main = () => {
 
   const fetchData = async () => {
     fetchCount++;
-    axios.get(`http://10.58.1.45:8000/products?offset=${16 * fetchCount}&limit=16`).then((res) => {
-      setFetchedData(res.data.updated_data);
-    });
+    axios
+      .get(`http://10.58.1.45:8000/products?offset=${16 * fetchCount}&limit=16`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        setFetchedData(res.data.updated_data);
+      });
   };
 
   const intersection = () => {

@@ -38,6 +38,7 @@ export default TopHeader;
 const TopHeaderWrap = styled.div`
   display: flex;
   flex: 0 0 auto;
+  padding-top: 60px;
   height: 690px;
 
   img {

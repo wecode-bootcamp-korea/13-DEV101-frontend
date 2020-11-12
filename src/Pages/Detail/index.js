@@ -44,15 +44,21 @@ const Detail = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", scrollEvent);
-    axios.get(`${API}${classId}`).then((res) => {
-      dispatch(getClassInfo(res.data.detail));
-      dispatch(getHeaderImages(res.data.header_images));
-      dispatch(getClassReviews(res.data.reviews));
-      dispatch(getClassCommunity(res.data.community));
-      dispatch(getNotice(res.data.notice));
-      dispatch(getProductId(classId));
-      dispatch(getDetailAside(res.data.detail_aside));
-    });
+    axios
+      .get(`${API}${classId}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        dispatch(getClassInfo(res.data.detail));
+        dispatch(getHeaderImages(res.data.header_images));
+        dispatch(getClassReviews(res.data.reviews));
+        dispatch(getClassCommunity(res.data.community));
+        dispatch(getNotice(res.data.notice));
+        dispatch(getProductId(classId));
+        dispatch(getDetailAside(res.data.detail_aside));
+      });
     return () => {
       window.removeEventListener("scroll", scrollEvent);
     };

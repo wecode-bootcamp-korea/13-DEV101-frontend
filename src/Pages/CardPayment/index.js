@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Styled from "styled-components";
 import { AiFillWarning } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 import CreaditCard from "./Components/CreaditCard";
 import Popup from "./Components/Popup";
 import { useSelector } from "react-redux";
@@ -11,6 +12,7 @@ const YEARS = range(19, 25);
 const INSTALLMONTHS = range(2, 12);
 
 const CardPayment = () => {
+  const history = useHistory();
   const [cardNumber, setCardNumber] = useState("");
   const [cardMonth, setCardMonth] = useState("월");
   const [cardYear, setCardYear] = useState("년");
@@ -67,7 +69,7 @@ const CardPayment = () => {
     setPlanMonth(e.target.value === "일시불" ? "0" : e.target.value);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (cardNumber.replace(/ /gi, "").length === 16) {
       setCardNumberValidation(true);
@@ -98,10 +100,13 @@ const CardPayment = () => {
       setPaymentSuccess(true);
     }
     setIsAllValidation(true);
-    setTimeout(() => {
+    await setTimeout(() => {
       setIsAllValidation(false);
       setPaymentSuccess(false);
     }, 2000);
+    await setTimeout(() => {
+      history.push("/");
+    }, 1000);
   };
   return (
     <CardPaymentWrap>

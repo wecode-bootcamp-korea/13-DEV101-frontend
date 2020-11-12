@@ -96,7 +96,6 @@ const SearchPage = () => {
     let callback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("hr");
           if (entry.intersectionRatio >= 0.75) {
             fetchData();
           }

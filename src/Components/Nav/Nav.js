@@ -17,22 +17,18 @@ const Nav = () => {
   const isNavActive = !(pathname === "/Login");
   const isNavBottomActive = !(pathname === "/SignUp" || pathname === "/myPage");
 
-  console.log(pathname);
-  console.log(isNavActive);
-
   const searchBoxFocus = () => {
     setIsFocus(!isFocus);
   };
 
   const submitSearchBox = (e) => {
-    console.log(inputValue);
     e.preventDefault();
     history.push(`searchPage?query=${inputValue}`);
   };
 
   const logout = () => {
     setIsLogin(false);
-    window.localStorage.removeItem("Token");
+    window.localStorage.removeItem("token");
     window.localStorage.removeItem("Kakao_token");
     window.localStorage.removeItem("kakao_413e1c12ccf6ca665f31d81c93ac39b6");
 
