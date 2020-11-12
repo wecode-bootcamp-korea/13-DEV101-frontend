@@ -6,28 +6,31 @@ import { ThemeProvider } from "styled-components";
 import Login from "./Pages/Login/Login";
 import LoginAnother from "./Pages/Login/LoginAnother";
 import SignUp from "./Pages/SignUp/SignUp";
-// import Nav from "./Components/Nav/Nav";
 import Main from "./Pages/Main/Main";
 import MyPage from "../src/Pages/MyPage/MyPage";
+import SearchPage from "./Pages/SearchPage/SearchPage";
 import theme from "./Styles/common";
 import Detail from "./Pages/Detail";
 import store from "./store/store";
 const Routes = () => {
   return (
-    // <Provider>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Nav />
-        <Switch>
-          <Route exact path="/Login" component={Login} />
-          <Route exact path="/SignUp" component={SignUp} />
-          <Route exact path="/LoginAnother" component={LoginAnother} />
-          <Route exact path="/myPage" component={MyPage} />
-          <Route path="/" component={Main} />
-        </Switch>
-      </Router>
-    </ThemeProvider>
-    // </Provider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          {/* <Nav /> */}
+          <Switch>
+            <Route exact path="/detail/:id" component={Detail} />
+            <Route exact path="/" component={Main} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/SignUp" component={SignUp} />
+            <Route exact path="/LoginAnother" component={LoginAnother} />
+            <Route exact path="/myPage" component={MyPage} />
+            <Route exact path="/searchPage/" component={SearchPage} />
+            <Route exact path="/searchPage/:searchVal" component={SearchPage} />
+          </Switch>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   );
 };
 
