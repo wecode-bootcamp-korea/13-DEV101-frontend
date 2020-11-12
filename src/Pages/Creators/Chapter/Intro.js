@@ -6,13 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 const SUB_CATEGORY = [
   ["미술", "요리/음료"],
   ["데이터/개발", "글쓰기/콘텐츠"],
-  [
-    "SNS/콘텐츠",
-    "마인드/자기계발",
-    "부동산/주식/재테크",
-    "온라인쇼핑몰",
-    "창업",
-  ],
+  ["SNS/콘텐츠", "마인드/자기계발", "부동산/주식/재테크", "온라인쇼핑몰", "창업"],
 ];
 
 const Intro = () => {
@@ -49,12 +43,9 @@ const Intro = () => {
       <div className="brand">
         <label>브랜드</label>
         <select name="brand" onChange={handleInfomation} value={brand}>
-          <option value={0}>
-            크리에이티브(미술, 음악, 요리 등 취미 클래스를 만들고 싶어요)
-          </option>
+          <option value={0}>크리에이티브(미술, 음악, 요리 등 취미 클래스를 만들고 싶어요)</option>
           <option value={1}>
-            커리어(직무, 창업, 자기계발 등 커리어 향상을 위한 클래스를 만들고
-            싶어요)
+            커리어(직무, 창업, 자기계발 등 커리어 향상을 위한 클래스를 만들고 싶어요)
           </option>
           <option value={2}>
             머니(부업, 창업, 재태크 등 수익 활동에 대한 클래스를 만들고 싶어요)

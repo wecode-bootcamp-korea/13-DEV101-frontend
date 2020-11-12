@@ -6,21 +6,9 @@ import ImageUploadFrom from "../Components/ImageUploadForm";
 const Info = ({ handleInfoImg, handleInfoDesc }) => {
   return (
     <Wrap>
-      <ImageUploadFrom
-        handleInfoDesc={handleInfoDesc}
-        handleInfoImg={handleInfoImg}
-        idx={0}
-      />
-      <ImageUploadFrom
-        handleInfoDesc={handleInfoDesc}
-        handleInfoImg={handleInfoImg}
-        idx={1}
-      />
-      <ImageUploadFrom
-        handleInfoDesc={handleInfoDesc}
-        handleInfoImg={handleInfoImg}
-        idx={2}
-      />
+      <ImageUploadFrom handleInfoDesc={handleInfoDesc} handleInfoImg={handleInfoImg} idx={0} />
+      <ImageUploadFrom handleInfoDesc={handleInfoDesc} handleInfoImg={handleInfoImg} idx={1} />
+      <ImageUploadFrom handleInfoDesc={handleInfoDesc} handleInfoImg={handleInfoImg} idx={2} />
     </Wrap>
   );
 };

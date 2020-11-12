@@ -24,8 +24,7 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
     }
   }, [brand]);
 
-  useEffect(() => {
-  }, [classTitle, coverBase, thumbnailBase]);
+  useEffect(() => {}, [classTitle, coverBase, thumbnailBase]);
 
   const handlePrev = () => {
     if (currentPage === "last") {
@@ -47,8 +46,7 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("level", level);
       try {
         axios.post(`${CREATOR_API}135/basicinfo`, formData);
-      } catch (err) {
-      }
+      } catch (err) {}
     } else if (currentPage === "title") {
       handleCurrentPage("info");
       const formData = new FormData();
@@ -62,8 +60,7 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
             "Content-Type": "multipart/form-data",
           },
         });
-      } catch (err) {
-      }
+      } catch (err) {}
     } else if (currentPage === "info") {
       const formData = new FormData();
       formData.append("theme_desc", info.one.desc);
