@@ -13,19 +13,11 @@ const TopHeader = ({ handleModal }) => {
       </div>
       <div>
         <div>
-          <img
-            onClick={() => handleModal(2)}
-            src={Sub1?.src}
-            alt="headerImage"
-          />
+          <img onClick={() => handleModal(2)} src={Sub1?.src} alt="headerImage" />
         </div>
         <div>
           <div>
-            <img
-              onClick={() => handleModal(3)}
-              src={Sub2?.src}
-              alt="headerImage"
-            />
+            <img onClick={() => handleModal(3)} src={Sub2?.src} alt="headerImage" />
           </div>
           <div className="moreImage" onClick={() => handleModal(4)}>
             <div>
