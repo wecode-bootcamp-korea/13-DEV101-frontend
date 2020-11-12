@@ -4,12 +4,7 @@ import { ProfileImages } from "./Utils";
 
 const ReviewComment = ({ img, nickname, date, children }) => {
   return (
-    <ReviewCommentWrap
-      img={img}
-      nickname={nickname}
-      date={date}
-      children={children}
-    >
+    <ReviewCommentWrap img={img} nickname={nickname} date={date} children={children}>
       <div>
         <ProfileImages img={img} />
         <div className="profileInfo">

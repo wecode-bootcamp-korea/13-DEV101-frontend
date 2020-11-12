@@ -36,11 +36,7 @@ export const ProfileImages = ({ img }) => {
   return (
     <ProfileImageWrap>
       <img
-        src={
-          img
-            ? img
-            : "https://ssl.pstatic.net/static/pwe/address/img_profile.png"
-        }
+        src={img ? img : "https://ssl.pstatic.net/static/pwe/address/img_profile.png"}
         alt="profile"
       />
     </ProfileImageWrap>

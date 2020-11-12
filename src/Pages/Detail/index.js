@@ -61,8 +61,7 @@ const Detail = () => {
   }, []);
 
   useEffect(() => {
-    const isFirstTabActive =
-      scrollValue < focusTarget.current[1].offsetTop - 50;
+    const isFirstTabActive = scrollValue < focusTarget.current[1].offsetTop - 50;
     setSelectTab(isFirstTabActive ? 1 : 2);
   }, [scrollValue]);
 
@@ -108,12 +107,8 @@ const Detail = () => {
         <div className="main">
           <div className="stickyTab">
             <ul>
-              <li onClick={() => MoveEvent(focusTarget.current[0]?.offsetTop)}>
-                클래스 소개
-              </li>
-              <li onClick={() => MoveEvent(focusTarget.current[1]?.offsetTop)}>
-                커뮤니티
-              </li>
+              <li onClick={() => MoveEvent(focusTarget.current[0]?.offsetTop)}>클래스 소개</li>
+              <li onClick={() => MoveEvent(focusTarget.current[1]?.offsetTop)}>커뮤니티</li>
             </ul>
           </div>
           <div>
@@ -134,8 +129,7 @@ const Detail = () => {
                 <div>
                   <span style={{ fontSize: "14px" }}>
                     {" "}
-                    <AiFillExclamationCircle /> 크리에이터와 함께 준비한 역대급
-                    할인 주간!
+                    <AiFillExclamationCircle /> 크리에이터와 함께 준비한 역대급 할인 주간!
                   </span>
                   <p>인기 클래스 선착순 최대 할인</p>
                 </div>
@@ -146,10 +140,7 @@ const Detail = () => {
                   alt="logo"
                 />
               </div>
-              <div
-                className="classInfo"
-                ref={(el) => (focusTarget.current[0] = el)}
-              >
+              <div className="classInfo" ref={(el) => (focusTarget.current[0] = el)}>
                 <h4>클래스 정보</h4>
                 <ul>
                   <li>
@@ -165,9 +156,7 @@ const Detail = () => {
                   </li>
                   <li>
                     <h5>자막 포함 여부</h5>
-                    <span>
-                      {detail.class_info?.is_subtitled ? "포함" : "미포함"}
-                    </span>
+                    <span>{detail.class_info?.is_subtitled ? "포함" : "미포함"}</span>
                   </li>
                 </ul>
               </div>
