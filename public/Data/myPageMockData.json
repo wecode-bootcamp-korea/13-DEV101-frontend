@@ -1,275 +1,310 @@
 {
-  "myPageMock": {
-    "my_info": {
-      "user_name": "위코드",
-      "profile_image": "https://images.unsplash.com/photo-1550948537-130a1ce83314?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2252&q=80",
-      "user_email": "wecode@gmail.com",
-      "point": 200,
-      "coupon_num": 15,
-      "liked_num": 36,
-      "class_num": 4
-    },
-    "seen_class": [
-      {
-        "product_id": 18,
-        "image_url": "https://images.unsplash.com/photo-1521225753516-46438a76f25a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "글쓰기/콘텐츠",
-        "mentor": "Dominguez",
-        "title": "신윤복의 닮고 싶은, 담고 싶은 웹툰 원고 제작 기법",
-        "like_count": 79,
-        "thumbs_up": 0,
-        "price": "338647.00",
-        "discount": "0.31",
-        "coupon": "4만원 쿠폰"
+  "message": "Success",
+  "mypage": [
+    {
+      "my_info": {
+        "user_name": "이시우",
+        "profile_image": "https://wecode.co.kr/static/media/song.eddbf8f7.png",
+        "coupon_num": 1,
+        "user_email": "jaehoi@iim.com",
+        "point": 10,
+        "liked_num": 2,
+        "order_count": 2
       },
-      {
-        "product_id": 19,
-        "image_url": "https://images.unsplash.com/photo-1500631195312-e3a9a5819f92?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "요리/음료",
-        "mentor": "Morris",
-        "title": "테이블 가득 채워내는 홈베이킹, 고든 램지와 함께 달달함을 나누는 디저트",
-        "like_count": 78,
-        "thumbs_up": 0,
-        "price": "143657.00",
-        "discount": "0.62",
-        "coupon": "3만원 쿠폰"
-      },
-      {
-        "product_id": 12,
-        "image_url": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "글쓰기/콘텐츠",
-        "mentor": "Clark",
-        "title": "전 라디오 작가의 팔지 않아도 사게 만드는 공감 카피라이팅",
-        "like_count": 68,
-        "thumbs_up": 0,
-        "price": "263392.00",
-        "discount": "0.63",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 14,
-        "image_url": "https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif",
-        "sub_category": "데이터/개발",
-        "mentor": "Chavez",
-        "title": "세상에서 젤루 쉬운 파이썬 ",
-        "like_count": 63,
-        "thumbs_up": 0,
-        "price": "252395.00",
-        "discount": "0.27",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 16,
-        "image_url": "https://wecode.co.kr/static/media/lee-so.39e2a003.png",
-        "sub_category": "데이터/개발",
-        "mentor": "Welch",
-        "title": "[웹 개발자] HTML, CSS, JS 속성 실무!",
-        "like_count": 62,
-        "thumbs_up": 0,
-        "price": "186101.00",
-        "discount": "0.47",
-        "coupon": "0"
-      },
-      {
-        "product_id": 20,
-        "image_url": "https://cdn.pixabay.com/photo/2016/09/08/04/12/programmer-1653351_960_720.png",
-        "sub_category": "데이터/개발",
-        "mentor": "Hoffman",
-        "title": "개발자가 되고 싶은 당신을 위한 개발자 로드맵 A to Z",
-        "like_count": 57,
-        "thumbs_up": 0,
-        "price": "144929.00",
-        "discount": "0.57",
-        "coupon": "5만원 쿠폰"
-      },
-      {
-        "product_id": 5,
-        "image_url": "https://images.unsplash.com/photo-1576495169018-bd2414046c6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=994&q=80",
-        "sub_category": "미술",
-        "mentor": "Wilson",
-        "title": "여행 드로잉, 꿈만 꾸세요. 핀든아트와 여행, 그리다",
-        "like_count": 50,
-        "thumbs_up": 0.9,
-        "price": "180222.00",
-        "discount": "0.32",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 13,
-        "image_url": "https://images.unsplash.com/photo-1601113768583-1463ea8e8cd4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "미술",
-        "mentor": "Graham",
-        "title": "볼펜으로 그려내는 일상의 기록, 뜻밖의 풍경, 찰나의 순간",
-        "like_count": 49,
-        "thumbs_up": 0,
-        "price": "373822.00",
-        "discount": "0.61",
-        "coupon": "0"
-      },
-      {
-        "product_id": 15,
-        "image_url": "https://images.unsplash.com/photo-1507133750040-4a8f57021571?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "요리/음료",
-        "mentor": "Clark",
-        "title": "혼자서도 잘해요! 고독한 미식가와 함께하는 혼밥 요리교실",
-        "like_count": 49,
-        "thumbs_up": 0,
-        "price": "414650.00",
-        "discount": "0.21",
-        "coupon": "5만원 쿠폰"
-      },
-      {
-        "product_id": 3,
-        "image_url": "https://images.unsplash.com/photo-1516876617270-291a72282e2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "요리/음료",
-        "mentor": "Bauer",
-        "title": "특별한 날을 더 특별하게! 커스텀 디자인 케이크 입문",
-        "like_count": 41,
-        "thumbs_up": 0.95,
-        "price": "192969.00",
-        "discount": "0.27",
-        "coupon": "0"
-      }
-    ],
-    "liked_class": [
-      {
-        "product_id": 18,
-        "image_url": "https://images.unsplash.com/photo-1521225753516-46438a76f25a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "글쓰기/콘텐츠",
-        "mentor": "Dominguez",
-        "title": "신윤복의 닮고 싶은, 담고 싶은 웹툰 원고 제작 기법",
-        "like_count": 79,
-        "thumbs_up": 0,
-        "price": "338647.00",
-        "discount": "0.31",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 19,
-        "image_url": "https://images.unsplash.com/photo-1500631195312-e3a9a5819f92?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "요리/음료",
-        "mentor": "Morris",
-        "title": "테이블 가득 채워내는 홈베이킹, 고든 램지와 함께 달달함을 나누는 디저트",
-        "like_count": 78,
-        "thumbs_up": 0,
-        "price": "143657.00",
-        "discount": "0.62",
-        "coupon": "3만원 쿠폰"
-      },
-      {
-        "product_id": 12,
-        "image_url": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "글쓰기/콘텐츠",
-        "mentor": "Clark",
-        "title": "전 라디오 작가의 팔지 않아도 사게 만드는 공감 카피라이팅",
-        "like_count": 68,
-        "thumbs_up": 0,
-        "price": "263392.00",
-        "discount": "0.63",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 14,
-        "image_url": "https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif",
-        "sub_category": "데이터/개발",
-        "mentor": "Chavez",
-        "title": "세상에서 젤루 쉬운 파이썬 ",
-        "like_count": 63,
-        "thumbs_up": 0,
-        "price": "252395.00",
-        "discount": "0.27",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 16,
-        "image_url": "https://wecode.co.kr/static/media/lee-so.39e2a003.png",
-        "sub_category": "데이터/개발",
-        "mentor": "Welch",
-        "title": "[웹 개발자] HTML, CSS, JS 속성 실무!",
-        "like_count": 62,
-        "thumbs_up": 0,
-        "price": "186101.00",
-        "discount": "0.47",
-        "coupon": "0"
-      },
-      {
-        "product_id": 20,
-        "image_url": "https://cdn.pixabay.com/photo/2016/09/08/04/12/programmer-1653351_960_720.png",
-        "sub_category": "데이터/개발",
-        "mentor": "Hoffman",
-        "title": "개발자가 되고 싶은 당신을 위한 개발자 로드맵 A to Z",
-        "like_count": 57,
-        "thumbs_up": 0,
-        "price": "144929.00",
-        "discount": "0.57",
-        "coupon": "5만원 쿠폰"
-      },
-      {
-        "product_id": 5,
-        "image_url": "https://images.unsplash.com/photo-1576495169018-bd2414046c6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=994&q=80",
-        "sub_category": "미술",
-        "mentor": "Wilson",
-        "title": "여행 드로잉, 꿈만 꾸세요. 핀든아트와 여행, 그리다",
-        "like_count": 50,
-        "thumbs_up": 0.9,
-        "price": "180222.00",
-        "discount": "0.32",
-        "coupon": "4만원 쿠폰"
-      },
-      {
-        "product_id": 13,
-        "image_url": "https://images.unsplash.com/photo-1601113768583-1463ea8e8cd4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "미술",
-        "mentor": "Graham",
-        "title": "볼펜으로 그려내는 일상의 기록, 뜻밖의 풍경, 찰나의 순간",
-        "like_count": 49,
-        "thumbs_up": 0,
-        "price": "373822.00",
-        "discount": "0.61",
-        "coupon": "0"
-      },
-      {
-        "product_id": 15,
-        "image_url": "https://images.unsplash.com/photo-1507133750040-4a8f57021571?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "요리/음료",
-        "mentor": "Clark",
-        "title": "혼자서도 잘해요! 고독한 미식가와 함께하는 혼밥 요리교실",
-        "like_count": 49,
-        "thumbs_up": 0,
-        "price": "414650.00",
-        "discount": "0.21",
-        "coupon": "5만원 쿠폰"
-      },
-      {
-        "product_id": 3,
-        "image_url": "https://images.unsplash.com/photo-1516876617270-291a72282e2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        "sub_category": "요리/음료",
-        "mentor": "Bauer",
-        "title": "특별한 날을 더 특별하게! 커스텀 디자인 케이크 입문",
-        "like_count": 41,
-        "thumbs_up": 0.95,
-        "price": "192969.00",
-        "discount": "0.27",
-        "coupon": "0"
-      }
-    ],
-    "class_made": [
-      {
-        "id": 1,
-        "class_image": "https://images.unsplash.com/photo-1593037515490-c4d56a9ff5ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80",
-        "title": "위코드와 함께하는 즐거운 드로잉",
-        "category": "드로잉",
-        "mentor": "HelloWorld",
-        "description": "우리 모두 함께 즐거운 드로잉, 시작해볼까요?"
-      },
-      {
-        "id": 2,
-        "class_image": "https://images.unsplash.com/photo-1593037515490-c4d56a9ff5ff?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80",
-        "title": "위코드와 함께하는 즐거운 드로잉",
-        "category": "드로잉",
-        "mentor": "HelloWorld",
-        "description": "우리 모두 함께 즐거운 드로잉, 시작해볼까요?"
-      }
-    ]
-  }
+      "seen_class": [
+        {
+          "id": 14,
+          "class_image": "https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif",
+          "isOpening": true,
+          "category": "데이터/개발",
+          "mentor": "Chavez",
+          "description": "세상에서 젤루 쉬운 파이썬 ",
+          "likeCount": 63,
+          "cheeredRate": 0,
+          "thumpsup": 0.9166666666666666,
+          "originPrice": "252395.00",
+          "discount": "0.27",
+          "month": 5
+        }
+      ],
+      "class_made": [
+        {
+          "id": 9,
+          "class_image": "https://images.unsplash.com/photo-1588967923711-bff894c462cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "title": "일러스트레이터 접시의 매력적인 얼굴 그리기",
+          "category": "미술",
+          "mentor": "Hunt"
+        },
+        {
+          "id": 36,
+          "class_image": "https://images.unsplash.com/photo-1588912914017-923900a34710?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1392&q=80",
+          "title": "우리는 왜 중독되는가, 중독은 어디에서 오는가",
+          "category": "글쓰기/콘텐츠",
+          "mentor": "Hunt"
+        },
+        {
+          "id": 54,
+          "class_image": "https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+          "title": "프론트엔드의 모든 것",
+          "category": "데이터/개발",
+          "mentor": "Hunt"
+        }
+      ],
+
+      "liked_class": [
+        {
+          "id": 1,
+          "class_image": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": false,
+          "category": "미술",
+          "mentor": "Ritter",
+          "description": "어색한 그림은 이제 안녕! 드로잉 기초부터 시작하는 르누아르의 붓드로잉",
+          "likeCount": 23,
+          "cheeredRate": 24,
+          "thumpsup": 0.925,
+          "originPrice": "225867.00",
+          "discount": "0.32",
+          "month": 5
+        },
+        {
+          "id": 2,
+          "class_image": "https://wecode.co.kr/static/media/song.eddbf8f7.png",
+          "isOpening": false,
+          "category": "데이터/개발",
+          "mentor": "Williams",
+          "description": "위코드 개발자 뮤와 함께하는 내 인생 첫번째 앱 만들기",
+          "likeCount": 57,
+          "cheeredRate": 27,
+          "thumpsup": 0.9047619047619048,
+          "originPrice": "210484.00",
+          "discount": "0.23",
+          "month": 5
+        },
+        {
+          "id": 3,
+          "class_image": "https://images.unsplash.com/photo-1516876617270-291a72282e2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": true,
+          "category": "요리/음료",
+          "mentor": "Bauer",
+          "description": "특별한 날을 더 특별하게! 커스텀 디자인 케이크 입문",
+          "likeCount": 41,
+          "cheeredRate": 0,
+          "thumpsup": 0.95,
+          "originPrice": "192969.00",
+          "discount": "0.27",
+          "month": 5
+        },
+        {
+          "id": 9,
+          "class_image": "https://images.unsplash.com/photo-1588967923711-bff894c462cb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": false,
+          "category": "미술",
+          "mentor": "Hunt",
+          "description": "일러스트레이터 접시의 매력적인 얼굴 그리기",
+          "likeCount": 48,
+          "cheeredRate": 24,
+          "thumpsup": 0,
+          "originPrice": "129824.00",
+          "discount": "0.56",
+          "month": 5
+        },
+        {
+          "id": 11,
+          "class_image": "https://images.unsplash.com/photo-1492739159057-7d1896b3c63f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": true,
+          "category": "요리/음료",
+          "mentor": "Graham",
+          "description": "어서오세요! 여기는 소헌네 홈카페입니다.",
+          "likeCount": 27,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "152850.00",
+          "discount": "0.27",
+          "month": 5
+        },
+        {
+          "id": 12,
+          "class_image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": true,
+          "category": "글쓰기/콘텐츠",
+          "mentor": "Clark",
+          "description": "전 라디오 작가의 팔지 않아도 사게 만드는 공감 카피라이팅",
+          "likeCount": 68,
+          "cheeredRate": 0,
+          "thumpsup": 0.85,
+          "originPrice": "263392.00",
+          "discount": "0.63",
+          "month": 5
+        },
+        {
+          "id": 13,
+          "class_image": "https://images.unsplash.com/photo-1601113768583-1463ea8e8cd4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": true,
+          "category": "미술",
+          "mentor": "Graham",
+          "description": "볼펜으로 그려내는 일상의 기록, 뜻밖의 풍경, 찰나의 순간",
+          "likeCount": 49,
+          "cheeredRate": 0,
+          "thumpsup": 0.96,
+          "originPrice": "373822.00",
+          "discount": "0.61",
+          "month": 5
+        },
+        {
+          "id": 14,
+          "class_image": "https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif",
+          "isOpening": true,
+          "category": "데이터/개발",
+          "mentor": "Chavez",
+          "description": "세상에서 젤루 쉬운 파이썬 ",
+          "likeCount": 63,
+          "cheeredRate": 0,
+          "thumpsup": 0.9166666666666666,
+          "originPrice": "252395.00",
+          "discount": "0.27",
+          "month": 5
+        },
+        {
+          "id": 18,
+          "class_image": "https://images.unsplash.com/photo-1521225753516-46438a76f25a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": true,
+          "category": "글쓰기/콘텐츠",
+          "mentor": "Dominguez",
+          "description": "신윤복의 닮고 싶은, 담고 싶은 웹툰 원고 제작 기법",
+          "likeCount": 79,
+          "cheeredRate": 0,
+          "thumpsup": 0.9,
+          "originPrice": "338647.00",
+          "discount": "0.31",
+          "month": 5
+        },
+        {
+          "id": 19,
+          "class_image": "https://images.unsplash.com/photo-1500631195312-e3a9a5819f92?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
+          "isOpening": true,
+          "category": "요리/음료",
+          "mentor": "Morris",
+          "description": "테이블 가득 채워내는 홈베이킹, 고든 램지와 함께 달달함을 나누는 디저트",
+          "likeCount": 78,
+          "cheeredRate": 0,
+          "thumpsup": 0.8571428571428571,
+          "originPrice": "143657.00",
+          "discount": "0.62",
+          "month": 5
+        },
+        {
+          "id": 20,
+          "class_image": "https://cdn.pixabay.com/photo/2016/09/08/04/12/programmer-1653351_960_720.png",
+          "isOpening": true,
+          "category": "데이터/개발",
+          "mentor": "Hoffman",
+          "description": "개발자가 되고 싶은 당신을 위한 개발자 로드맵 A to Z",
+          "likeCount": 57,
+          "cheeredRate": 0,
+          "thumpsup": 0.9090909090909091,
+          "originPrice": "144929.00",
+          "discount": "0.57",
+          "month": 5
+        },
+        {
+          "id": 23,
+          "class_image": "https://images.unsplash.com/photo-1575467678950-0c09aad418af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+          "isOpening": true,
+          "category": "요리/음료",
+          "mentor": "Bauer",
+          "description": "채소는 포기해도, 디저트는 포기 못할 때! 달콤한 육식주의자 로푸드 디저트",
+          "likeCount": 25,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "201276.00",
+          "discount": "0.34",
+          "month": 5
+        },
+        {
+          "id": 24,
+          "class_image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
+          "isOpening": true,
+          "category": "데이터/개발",
+          "mentor": "Welch",
+          "description": "코딩하는 나에게 취하다:star:️ 개발자 속성반",
+          "likeCount": 21,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "153064.00",
+          "discount": "0.62",
+          "month": 5
+        },
+        {
+          "id": 25,
+          "class_image": "https://images.unsplash.com/photo-1583502071591-0896dbb468b0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=655&q=80",
+          "isOpening": true,
+          "category": "미술",
+          "mentor": "Tran",
+          "description": "시크하게 그리는 각도의 마법, 오곡밥의 색연필 인물화",
+          "likeCount": 24,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "144854.00",
+          "discount": "0.65",
+          "month": 5
+        },
+        {
+          "id": 29,
+          "class_image": "https://images.unsplash.com/photo-1526312426976-f4d754fa9bd6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1223&q=80",
+          "isOpening": true,
+          "category": "미술",
+          "mentor": "Wang",
+          "description": "다양한 색으로 과감하게 그려보는 파스텔 드로잉",
+          "likeCount": 21,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "214439.00",
+          "discount": "0.29",
+          "month": 5
+        },
+        {
+          "id": 31,
+          "class_image": "https://images.unsplash.com/photo-1472555950005-7fa40ece7f6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=850&q=80",
+          "isOpening": true,
+          "category": "요리/음료",
+          "mentor": "Edwards",
+          "description": "샐러드만으로는 맛과 양 모두 못 즐깁니다. 샐러드 레시피 & 드레싱 클래스",
+          "likeCount": 29,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "405975.00",
+          "discount": "0.23",
+          "month": 5
+        },
+        {
+          "id": 39,
+          "class_image": "https://images.unsplash.com/photo-1518164147695-36c13dd568f5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80",
+          "isOpening": true,
+          "category": "요리/음료",
+          "mentor": "Powell",
+          "description": "밀가루YES!! 단짠 베이킹",
+          "likeCount": 28,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "152623.00",
+          "discount": "0.25",
+          "month": 5
+        },
+        {
+          "id": 40,
+          "class_image": "https://images.unsplash.com/photo-1531537571171-a707bf2683da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80",
+          "isOpening": true,
+          "category": "글쓰기/콘텐츠",
+          "mentor": "Hoffman",
+          "description": "[교재 무료 증정] 300문장 끝! 왕초보 일본어 회화",
+          "likeCount": 27,
+          "cheeredRate": 0,
+          "thumpsup": 0,
+          "originPrice": "271557.00",
+          "discount": "0.58",
+          "month": 5
+        }
+      ]
+    }
+  ]
 }
