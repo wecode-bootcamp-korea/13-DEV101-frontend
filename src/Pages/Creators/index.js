@@ -31,17 +31,12 @@ const Creators = () => {
 
   const handleCoverImg = (type, data) => {
     if (type.toString() === "cover") {
-      console.log("cover");
       setCoverImg(data);
     } else if (type.toString() === "thumbnail") {
-      console.log("thumbnail");
       setThumbnailImg(data);
     }
   };
 
-  useEffect(() => {
-    console.log(info);
-  }, [info]);
   const handleInfoImg = (type, data) => {
     if (type === 0) {
       setInfo({ ...info, one: { ...info.one, src: data } });

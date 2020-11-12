@@ -14,7 +14,7 @@ import {
 import Button from "./Components/Button";
 import { Hr, API, Tooltip } from "./Components/Utils";
 
-const Aside = () => {
+const Aside = ({ classId }) => {
   const [category, setCategory] = useState("");
   const [creatorName, setCreatorName] = useState("");
   const [classTitle, setClassTitle] = useState("");
@@ -36,7 +36,6 @@ const Aside = () => {
     setCreatorName(creator_name);
     setClassTitle(title);
     setIsHeartToggle(liked);
-    // setStatus(res.data.detail_aside.status);
     setPrice(price);
     setHeartCount(heart);
   }, [detailAside]);
@@ -136,25 +135,20 @@ const AsideWrap = styled.div`
   width: 31%;
   margin-left: 25px;
   max-height: 100vh;
-
   .itemIntro {
     ${wrapMixed}
-
     > p {
       font-size: 14px;
       margin-bottom: 8px;
     }
-
     h3 {
       font-size: 20px;
       font-weight: 700;
       line-height: 28px;
       margin-bottom: 8px;
     }
-
     .nowRegi {
       margin-bottom: 4px;
-
       div {
         display: inline-block;
         background-color: ${({ theme }) => theme.colors.softGray};
@@ -164,45 +158,37 @@ const AsideWrap = styled.div`
         font-weight: 600;
       }
     }
-
     .installment {
       margin-top: 15px;
       display: flex;
       justify-content: space-between;
       font-weight: 600;
-
       div {
         font-size: 14px;
       }
-
       h4 {
         font-size: 18px;
       }
     }
-
     .contentInfo {
       display: flex;
       flex-wrap: wrap;
-
       div {
         display: flex;
         align-items: center;
         width: 50%;
         padding: 10px;
-
         span {
           font-size: 14px;
           padding-left: 8px;
         }
       }
     }
-
     .buttons {
       display: flex;
       position: relative;
       -webkit-user-select: none;
       user-select: none;
-
       .heartButton {
         display: flex;
         width: 55px;
@@ -212,7 +198,6 @@ const AsideWrap = styled.div`
         font-weight: bold;
         background: #f8f9f9;
         cursor: pointer;
-
         div {
           display: flex;
           justify-content: center;
@@ -225,20 +210,17 @@ const AsideWrap = styled.div`
       }
     }
   }
-
   .asideBanner {
     display: flex;
     justify-content: space-between;
     ${wrapMixed}
     padding: 18px;
     margin-top: 15px;
-
     div {
       span {
         font-size: 14px;
         font-weight: bold;
       }
-
       p {
         color: gray;
         padding: 7px 0;

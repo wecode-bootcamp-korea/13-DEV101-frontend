@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import PaymentReducer from "./PaymentReducer";
 import DetailReducer from "./DetailReducer";
 import CreatorsReducer from "./CreatorsReducer";
 
 const rootReducer = combineReducers({
+  PaymentReducer,
   DetailReducer,
   CreatorsReducer,
 });

@@ -32,7 +32,6 @@ const Title = ({ handleCoverImg }) => {
       }
     };
     e.target.files[0] && reader.readAsDataURL(e.target.files[0]);
-    console.log([e.target.name], e.target.files[0]);
     handleCoverImg([e.target.name], e.target.files[0]);
   };
 

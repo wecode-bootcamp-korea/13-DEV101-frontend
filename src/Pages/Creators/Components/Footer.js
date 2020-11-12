@@ -24,9 +24,7 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
     }
   }, [brand]);
 
-  useEffect(() => {
-    console.log(classTitle, coverBase, thumbnailBase);
-  }, [classTitle, coverBase, thumbnailBase]);
+  useEffect(() => {}, [classTitle, coverBase, thumbnailBase]);
 
   const handlePrev = () => {
     if (currentPage === "last") {
@@ -48,11 +46,8 @@ const Footer = ({ info, coverImg, thumbnailImg, currentPage, handleCurrentPage }
       formData.append("level", level);
       try {
         axios.post(`${CREATOR_API}135/basicinfo`, formData);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     } else if (currentPage === "title") {
-      console.log(classTitle, coverImg, thumbnailImg);
       handleCurrentPage("info");
       const formData = new FormData();
       formData.append("title", classTitle);

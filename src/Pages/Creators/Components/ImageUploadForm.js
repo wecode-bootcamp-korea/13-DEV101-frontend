@@ -15,7 +15,6 @@ const ImageUploadForm = ({ idx, handleInfoImg, handleInfoDesc }) => {
       const base64 = reader.result;
       if (base64) {
         result = { ...result, src: base64.toString() };
-        console.log(result);
         dispatch(
           getInfoImages({
             [idx]: result,
@@ -27,7 +26,6 @@ const ImageUploadForm = ({ idx, handleInfoImg, handleInfoDesc }) => {
       reader.readAsDataURL(e.target.files[0]);
       handleInfoImg(idx, e.target.files[0]);
     }
-    console.log(result);
   };
 
   const handlePreview = () => {
