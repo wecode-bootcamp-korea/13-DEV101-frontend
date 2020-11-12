@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
-import ClassCard from "../../../Components/ClassCard";
+import MyClassCard from "./MyClassCard";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,7 +26,7 @@ const slickSettings = {
   dots: false,
 };
 
-const MyPageSlider = ({ cardDataList, title }) => {
+const MyPageSlider = ({ cardDataList, title, likedList }) => {
   return (
     <section className="MyPageSlider">
       <RightContent marginTop={title}>
@@ -35,13 +35,14 @@ const MyPageSlider = ({ cardDataList, title }) => {
         </Title>
         <div>
           <StyledSlider
+            className="left-align-slick"
             {...slickSettings}
             nextArrow={<Arrow type="next" />}
             prevArrow={<Arrow type="prev" />}
           >
             {cardDataList &&
-              cardDataList.map((cardData, i) => {
-                return <ClassCard key={i} cardWidth={243} {...cardData} />;
+              cardDataList.map((cardData) => {
+                return <MyClassCard cardWidth={243} {...cardData} likedList={likedList} />;
               })}
           </StyledSlider>
         </div>
@@ -56,12 +57,16 @@ const StyledSlider = styled(Slider)`
   overflow: unset;
   position: relative;
 
+  .slick-list > .slick-track {
+    margin-left: 0 !important;
+  }
+
   .slick-track {
     margin-right: 10px;
   }
   .nextArrowRight {
     position: absolute;
-    bottom: 380px;
+    bottom: 390px;
     right: 2.7%;
     z-index: 9;
     color: #1c1d1e;
@@ -82,7 +87,7 @@ const StyledSlider = styled(Slider)`
 
   .prevArrowLeft {
     position: absolute;
-    bottom: 380px;
+    bottom: 390px;
     right: 6.9%;
     z-index: 9;
     color: #1c1d1e;
