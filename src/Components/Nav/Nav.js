@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation, useParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
 
 const Nav = () => {
+  const params = useParams();
+  const history = useHistory();
+  const { pathname } = useLocation();
   const [isLogin, setIsLogin] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
-  const history = useHistory();
   const [inputValue, setInputValue] = useState("");
   const [isClick, setIsClick] = useState(false);
   const [mockData, setMockData] = useState([]);
-  const { pathname } = useLocation();
-  const isNavActive = !(pathname === "/Login");
+  const isNavActive = !(
+    pathname === "/Login" ||
+    pathname.includes("payment") ||
+    pathname.includes("creators")
+  );
   const isNavBottomActive = !(pathname === "/SignUp" || pathname === "/myPage");
+
+  console.log(!pathname.includes("payment"));
 
   const searchBoxFocus = () => {
     setIsFocus(!isFocus);
