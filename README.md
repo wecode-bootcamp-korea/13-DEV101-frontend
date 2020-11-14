@@ -28,6 +28,9 @@ SCRUM 방식을 사용해 자기 계발 및 취미 관련 사이트 class 101 (h
 - Django
 - (추후 재작성 예정)
 
+## 우리의 깨끗해진 Trello
+![](https://images.velog.io/images/sunnysideup0w0/post/7991f30a-790b-4a94-9e5b-6d678b8c9cd3/image.png)
+
 ## 멤버 소개
 1. 구현정 
 - PM, Frontend Developer
